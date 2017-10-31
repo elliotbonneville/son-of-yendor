@@ -15,13 +15,14 @@ class LocomotionComponent extends window.Component {
             tileCollider &&
             tileCollider.enabled
         ) {
-            return;
+            return false;
         }
 
         location.x = x;
         location.y = y;
         this.owner.update();
         previousTile.update();
+        return true;
     }
 }
 
