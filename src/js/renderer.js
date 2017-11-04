@@ -51,22 +51,5 @@ function drawCell(x, y, char, fgColor, bgColor) {
     cell.innerHTML = char;
 }
 
-function drawLevel(level) {
-    Object.keys(level.tiles).forEach(coords => {
-        const tile = level.tiles[coords];
-        drawCell(
-            tile.x,
-            tile.y,
-            tile.char,
-            tile.fgColor,
-            tile.bgColor,
-        );
-    });
-}
-
-window.renderer = {
-    init,
-    drawCell,
-    drawLevel,
-};
+window.renderer = { init, drawCell };
 })();

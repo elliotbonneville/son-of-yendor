@@ -4,8 +4,7 @@ class PlayerInputComponent extends window.Component {
         super(...args);
         
         const locomotor = this.owner.getComponent(window.LocomotionComponent);
-        const { move } = locomotor;
-        const input = window.input;
+        const { input } = window;
         input.bindKeyListener('down', 'left', this.move.bind(this, -1, 0));
         input.bindKeyListener('down', 'up', this.move.bind(this, 0, -1));
         input.bindKeyListener('down', 'right', this.move.bind(this, 1, 0));
@@ -13,7 +12,9 @@ class PlayerInputComponent extends window.Component {
     }
 
     move(x, y) {
-        if (this.owner.getComponent(window.LocomotionComponent).move(x, y)) {
+        const locomotor = this.owner.getComponent(window.LocomotionComponent);
+        const moved = locomotor.move(x, y);
+        if (moved) {
             window.game.tick();
         }
     }

@@ -1,5 +1,6 @@
-(() => {
-class LocationComponent extends window.Component {
+import Component from '~/components/Component.js';
+
+export default class LocationComponent extends Component {
     constructor(owner, level, x, y) {
         super(owner);
         this.level = level;
@@ -7,6 +8,3 @@ class LocationComponent extends window.Component {
         this.y = y;
     }
 }
-
-window.LocationComponent = LocationComponent;
-})();

@@ -1,9 +1,10 @@
 (() => {
 const { GAME_WIDTH, GAME_HEIGHT } = window.CONSTANTS;
-const { fillRandom, createPermawall } = window.map;
 const { randomRange } = window.Math2;
-class Level {
+class Level extends window.GameObject {
     constructor(level) {
+        super();
+
         this.level = level;
         this.width = GAME_WIDTH;
         this.height = GAME_HEIGHT;
@@ -12,15 +13,14 @@ class Level {
     }
 
     generate() {
-        fillRandom(this);
-        createPermawall(this);
+        window.map.fillRandom(this).createPermawall(this);
     }
 
     getTile(x, y) {
         return this.tiles[`${x},${y}`];
     }
     
-    getTileOfType(type) {
+    getTileByType(type) {
         let x;
         let y;
         let tile;

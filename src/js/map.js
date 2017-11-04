@@ -1,16 +1,18 @@
 (() => {
-const Tile = window.Tile;
-
 function fillRandom(level) {
     for (let x = 0; x < level.width; x++) {
         for (let y = 0; y < level.height; y++) {
-            level.tiles[`${x},${y}`] = new window.Tile(
+            const tile = level.tiles[`${x},${y}`] = new window.Tile(
+                level,
                 x,
                 y,
                 Math.random() > 0.8 ? 'wall' : 'floor',
             );
+            tile.update();
         }
     }
+    
+    return map;
 }
 
 function createPermawall(level) {
@@ -23,7 +25,9 @@ function createPermawall(level) {
         level.getTile(0, y).type = 'wall';
         level.getTile(level.width - 1, y).type = 'wall';
     }
+
+    return map;
 }
 
-window.map = { fillRandom, createPermawall }
+const map = window.map = { fillRandom, createPermawall };
 })();
