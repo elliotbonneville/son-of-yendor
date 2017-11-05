@@ -1,0 +1,21 @@
+- 1:1 time, the length of the game is the length of time the adventurer spends in the dungeon
+- extremely deep dungeon simulation
+    - smart monsters
+    - fluid simulation
+    - balanced ecosystem
+    - realistic in terms of what items and natural resources are available
+    - cohesive and fresh flavor
+    - monsters have full inventories and dwelling places
+    - very large dungeon systems
+- medium game length, 4 hours for a playthrough
+- no HP regen
+- fatigue system
+- lots of stuff
+    - enormous variation of items, monsters, and dungeon features
+    - very complicated dungeons
+    - each item unique
+    - deep interactions between items
+- rediculously high replayability
+- no experience or class system
+- no gold
+- very tight game design -- every game is winnable
