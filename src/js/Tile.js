@@ -1,4 +1,8 @@
-(() => {
+import GameObject from '~/GameObject';
+import Location from '~/components/LocationComponent';
+import Renderer from '~/components/RendererComponent';
+import Collider from '~/components/ColliderComponent';
+
 const tileTypes = {
     'floor': {
         char: '.',
@@ -14,13 +18,13 @@ const tileTypes = {
     },
 };
 
-class Tile extends window.GameObject {
+export default class Tile extends GameObject {
     constructor(level, x, y, type) {
         super();
         this.addComponents([
-            new window.LocationComponent(this, level, x, y),
-            new window.RendererComponent(this),
-            new window.ColliderComponent(this),
+            new Location(this, level, x, y),
+            new Renderer(this),
+            new Collider(this),
         ]);
         this.type = type;
     }
@@ -29,11 +33,11 @@ class Tile extends window.GameObject {
         this._type = _type;
         const { char, fgColor, bgColor, walkable } = tileTypes[_type];
         Object.assign(
-            this.getComponent(window.RendererComponent),
+            this.getComponent(Renderer),
             { char, fgColor, bgColor },
         );
         Object.assign(
-            this.getComponent(window.ColliderComponent),
+            this.getComponent(Collider),
             { enabled: !walkable },
         );
         this.update();
@@ -43,6 +47,3 @@ class Tile extends window.GameObject {
         return this._type;
     }
 }
-
-window.Tile = Tile;
-})();

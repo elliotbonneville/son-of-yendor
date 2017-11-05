@@ -1,17 +1,21 @@
-(() => {
-class MonsterIntelligenceComponent extends window.Component {
+import Component from '~/components/Component';
+import Locomotion from '~/components/LocomotionComponent';
+
+import { randomDirection } from '~/Math2';
+
+export default class MonsterIntelligenceComponent extends Component {
     tick() {}
 }
 
 class RandomMonsterIntelligence extends MonsterIntelligenceComponent {
     tick() {
-        const { x, y } = window.Math2.randomDirection();
-        this.owner.getComponent(window.LocomotionComponent).move(x, y);
+        const { x, y } = randomDirection();
+        this.owner.getComponent(Locomotion).move(x, y);
     }
 }
 
-window.MonsterIntelligenceComponent = MonsterIntelligenceComponent;
-window.monsterIntelligenceComponents = {
+const monsterIntelligenceComponents = {
     random: RandomMonsterIntelligence,
 };
-})();
+
+export { monsterIntelligenceComponents };

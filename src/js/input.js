@@ -18,7 +18,7 @@ const keysByName = Object
 
 const listeners = {up: {}, down: {}};
 
-function bindKeyListener(direction, key, listener) {
+export function bindKeyListener(direction, key, listener) {
     const directionListeners = listeners[direction];
     const which = keysByName[key];
     if (directionListeners[which]) {
@@ -28,24 +28,19 @@ function bindKeyListener(direction, key, listener) {
     }
 }
 
-function unbindKeyListener(direction, key, listener) {
+export function unbindKeyListener(direction, key, listener) {
     const which = keysByName[key];
     const directionListeners = listeners[direction][which];
     directionListeners.splice(directionListeners.indexOf(listener), 1);
 }
 
 function callListeners(direction, event) {
+    if (event) event.preventDefault();
     const directionListeners = listeners[direction][event.which];
     if (directionListeners) directionListeners.forEach(listener => listener());
 }
 
-function init() {
+export function init() {
     document.addEventListener('keydown', callListeners.bind(null, 'down'));
     document.addEventListener('keyup', callListeners.bind(null, 'up'));
 }
-
-window.input = {
-    init,
-    bindKeyListener,
-    unbindKeyListener,
-};

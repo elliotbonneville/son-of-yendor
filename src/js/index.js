@@ -1,14 +1,11 @@
-import Location from '~/components/LocationComponent.js';
-console.log(Location);
+import Location from '~/components/LocationComponent';
 
-const CONSTANTS = {
-    GAME_WIDTH: 80,
-    GAME_HEIGHT: 24,
-    CELL_WIDTH: 17,
-    CELL_HEIGHT: 24,
-    CELL_PADDING: 3,
-    FONT_SIZE: 22,
-};
+import * as input from '~/input';
+import * as renderer from '~/renderer';
+
+import Level from '~/Level';
+import Player from '~/Player';
+import Monster from '~/Monster';
 
 let currentLevel;
 let monsters = [];
@@ -16,22 +13,20 @@ let monsters = [];
 function init() {
     console.log('Initializing game');
 
-    window.input.init();
-    window.renderer.init();
+    input.init();
+    renderer.init();
     
-    currentLevel = new window.Level(1);
+    currentLevel = new Level(1);
 
-    const location = currentLevel
-        .getTileByType('floor')
-        .getComponent(window.LocationComponent);
-    const player = new window.Player(currentLevel, location.x, location.y);
+    const location = currentLevel.getTileByType('floor').getComponent(Location);
+    const player = new Player(currentLevel, location.x, location.y);
     player.update();
 
     for (let i = 0; i < 40; i++) { 
         const monsterLocation = currentLevel
             .getTileByType('floor')
-            .getComponent(window.LocationComponent);
-        const monster = new window.Monster(
+            .getComponent(Location);
+        const monster = new Monster(
             'kobold',
             currentLevel,
             monsterLocation.x,
@@ -42,10 +37,9 @@ function init() {
     }
 }
 
-function tick() {
+export function tick() {
     console.log('Game tick');
     monsters.forEach(monster => monster.tick());
 }
 
-setTimeout(init, 100);
-export { CONSTANTS };
+init();

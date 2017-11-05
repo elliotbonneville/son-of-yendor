@@ -1,4 +1,10 @@
-(() => {
+import Actor from '~/Actor';
+
+import Renderer from '~/components/RendererComponent';
+import Body from '~/components/BodyComponent';
+import MonsterIntelligence, { monsterIntelligenceComponents }
+    from '~/components/monsterIntelligenceComponents';
+
 const monsterData = {
     kobold: {
         char: 'k',
@@ -8,26 +14,23 @@ const monsterData = {
     },
 };
 
-class Monster extends window.Actor {
+export default class Monster extends Actor {
     constructor(type, ...args) {
         super(...args);
         this.type = type;
         const { char, fgColor, ai, hp } = monsterData[type];
         Object.assign(
-            this.getComponent(window.RendererComponent),
+            this.getComponent(Renderer),
             { char, fgColor },
         );
         Object.assign(
-            this.getComponent(window.BodyComponent),
+            this.getComponent(Body),
             { hp },
         );
-        this.addComponent(new window.monsterIntelligenceComponents[ai]);
+        this.addComponent(new monsterIntelligenceComponents[ai]);
     }
 
     tick() {
-        this.getComponent(window.MonsterIntelligenceComponent).tick();
+        this.getComponent(MonsterIntelligence).tick();
     }
 }
-
-window.Monster = Monster;
-})();

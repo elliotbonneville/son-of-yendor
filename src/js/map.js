@@ -1,8 +1,9 @@
-(() => {
-function fillRandom(level) {
+import Tile from '~/Tile';
+
+export function fillRandom(level) {
     for (let x = 0; x < level.width; x++) {
         for (let y = 0; y < level.height; y++) {
-            const tile = level.tiles[`${x},${y}`] = new window.Tile(
+            const tile = level.tiles[`${x},${y}`] = new Tile(
                 level,
                 x,
                 y,
@@ -11,11 +12,9 @@ function fillRandom(level) {
             tile.update();
         }
     }
-    
-    return map;
 }
 
-function createPermawall(level) {
+export function createPermawall(level) {
     for (let x = 0; x < level.width; x++) {
         level.getTile(x, 0).type = 'wall';
         level.getTile(x, level.height - 1).type = 'wall';
@@ -25,9 +24,4 @@ function createPermawall(level) {
         level.getTile(0, y).type = 'wall';
         level.getTile(level.width - 1, y).type = 'wall';
     }
-
-    return map;
 }
-
-const map = window.map = { fillRandom, createPermawall };
-})();

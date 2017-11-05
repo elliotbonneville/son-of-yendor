@@ -1,5 +1,4 @@
-(() => {
-class GameObject {
+export default class GameObject {
     constructor(components) {
         this.components = [];
         GameObject.gameObjects.push(this);
@@ -29,5 +28,3 @@ class GameObject {
 }
 
 GameObject.gameObjects = [];
-window.GameObject = GameObject;
-})();

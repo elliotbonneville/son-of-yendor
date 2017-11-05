@@ -1,16 +1,15 @@
-(() => {
-const {
+import {
     GAME_WIDTH,
     GAME_HEIGHT,
     CELL_WIDTH,
     CELL_HEIGHT,
     CELL_PADDING,
     FONT_SIZE,
-} = window.CONSTANTS;
+} from '~/constants';
 
 let cells;
 
-function init() {
+export function init() {
     const gameContainer = document.getElementById('game');
     Object.assign(gameContainer.style, {
         width: GAME_WIDTH * CELL_WIDTH,
@@ -42,14 +41,11 @@ function init() {
     }
 }
 
-function drawCell(x, y, char, fgColor, bgColor) {
-    cell = cells[`${x},${y}`];
+export function drawCell(x, y, char, fgColor, bgColor) {
+    const cell = cells[`${x},${y}`];
     Object.assign(cell.style, {
         color: fgColor,
         backgroundColor: bgColor,
     });
     cell.innerHTML = char;
 }
-
-window.renderer = { init, drawCell };
-})();

@@ -1,7 +1,10 @@
-(() => {
-const { GAME_WIDTH, GAME_HEIGHT } = window.CONSTANTS;
-const { randomRange } = window.Math2;
-class Level extends window.GameObject {
+import GameObject from '~/GameObject';
+
+import { GAME_WIDTH, GAME_HEIGHT } from '~/constants';
+import { randomRange } from '~/Math2';
+import { fillRandom, createPermawall } from '~/map';
+
+export default class Level extends GameObject {
     constructor(level) {
         super();
 
@@ -13,7 +16,8 @@ class Level extends window.GameObject {
     }
 
     generate() {
-        window.map.fillRandom(this).createPermawall(this);
+        fillRandom(this);
+        createPermawall(this);
     }
 
     getTile(x, y) {
@@ -34,6 +38,3 @@ class Level extends window.GameObject {
         return tile;
     }
 }
-
-window.Level = Level;
-})();

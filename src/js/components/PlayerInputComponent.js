@@ -1,24 +1,25 @@
-(() => {
-class PlayerInputComponent extends window.Component {
+import Component from '~/components/Component';
+import Location from '~/components/LocationComponent';
+import Locomotion from '~/components/LocomotionComponent';
+
+import { bindKeyListener } from '~/input';
+
+import { tick } from '~/index';
+
+export default class PlayerInputComponent extends Component {
     constructor(...args) {
         super(...args);
         
-        const locomotor = this.owner.getComponent(window.LocomotionComponent);
-        const { input } = window;
-        input.bindKeyListener('down', 'left', this.move.bind(this, -1, 0));
-        input.bindKeyListener('down', 'up', this.move.bind(this, 0, -1));
-        input.bindKeyListener('down', 'right', this.move.bind(this, 1, 0));
-        input.bindKeyListener('down', 'down', this.move.bind(this, 0, 1));
+        const locomotor = this.owner.getComponent(Location);
+        bindKeyListener('down', 'left', this.move.bind(this, -1, 0));
+        bindKeyListener('down', 'up', this.move.bind(this, 0, -1));
+        bindKeyListener('down', 'right', this.move.bind(this, 1, 0));
+        bindKeyListener('down', 'down', this.move.bind(this, 0, 1));
     }
 
     move(x, y) {
-        const locomotor = this.owner.getComponent(window.LocomotionComponent);
+        const locomotor = this.owner.getComponent(Locomotion);
         const moved = locomotor.move(x, y);
-        if (moved) {
-            window.game.tick();
-        }
+        if (moved) tick();
     }
 }
-
-window.PlayerInputComponent = PlayerInputComponent;
-})();
