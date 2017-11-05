@@ -35,9 +35,11 @@ export function unbindKeyListener(direction, key, listener) {
 }
 
 function callListeners(direction, event) {
-    if (event) event.preventDefault();
     const directionListeners = listeners[direction][event.which];
-    if (directionListeners) directionListeners.forEach(listener => listener());
+    if (directionListeners) {
+        event.preventDefault();
+        directionListeners.forEach(listener => listener());
+    }
 }
 
 export function init() {

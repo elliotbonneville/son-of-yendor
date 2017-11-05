@@ -2,7 +2,7 @@
   "name": "roguelike",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/js/index.js",
   "scripts": {
     "start": "webpack --watch"
   },
