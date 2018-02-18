@@ -4,7 +4,7 @@ import Locomotion from '~/components/LocomotionComponent';
 
 import { bindKeyListener } from '~/input';
 
-import { tick } from '~/index';
+import { tick } from '~/app';
 
 export default class PlayerInputComponent extends Component {
     constructor(...args) {

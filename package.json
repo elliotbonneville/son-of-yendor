@@ -4,18 +4,19 @@
   "description": "",
   "main": "src/js/index.js",
   "scripts": {
-    "start": "webpack --watch"
+    "start": "webpack-dev-server --watch --open"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "webpack": "^3.8.1"
-  },
   "dependencies": {
-    "babel-core": "^7.0.0-beta.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^2.0.0-alpha.20"
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "babel-loader": "8.0.0-beta.0",
+    "webpack": "^3.11.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.9",
+    "style-loader": "^0.20.2",
+    "webpack-dev-server": "^2.11.1"
   }
 }
