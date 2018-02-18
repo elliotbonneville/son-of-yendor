@@ -1,3 +1,8 @@
+@font-face {
+	font-family: "VideoTerminalScreen";
+	src: url('../static/fonts/VideoTerminalScreen.ttf');
+}
+
 body {
     background: black;
 }

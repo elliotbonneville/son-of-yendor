@@ -5,7 +5,8 @@ module.exports = {
     entry: './src/js/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/',
     },
     module: {
         loaders: [
@@ -16,13 +17,16 @@ module.exports = {
                     presets: ['@babel/preset-env']
                 }
             },
-            
         ],
         rules: [
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
-            }
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'url-loader?limit=10000000&name=./fonts/[name].[ext]'
+            }, 
         ],
     },
     stats: {

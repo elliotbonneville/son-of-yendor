@@ -15,7 +15,7 @@ export function init() {
         width: GAME_WIDTH * CELL_WIDTH,
         height: GAME_HEIGHT * CELL_HEIGHT,
         backgroundColor: 'black',
-        fontFamily: 'Courier',
+        fontFamily: 'VideoTerminalScreen',
         position: 'absolute',
         fontSize: `${FONT_SIZE}px`,
         textAlign: 'center',

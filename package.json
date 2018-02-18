@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/js/index.js",
   "scripts": {
-    "start": "webpack-dev-server --watch --open"
+    "start": "webpack-dev-server --watch"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,9 @@
   },
   "devDependencies": {
     "css-loader": "^0.28.9",
+    "file-loader": "^1.1.6",
     "style-loader": "^0.20.2",
+    "url-loader": "^0.6.2",
     "webpack-dev-server": "^2.11.1"
   }
 }
