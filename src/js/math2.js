@@ -3,7 +3,8 @@ export function randomRange(floor, ceiling) {
 }
 
 export function randomDirection() {
-    const x = randomRange(2) - 1;
-    const y = randomRange(2) - 1;
-    return { x, y };
+    return {
+        x: randomRange(-1, 1),
+        y: randomRange(-1, 1),
+    };
 }
