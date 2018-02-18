@@ -7,6 +7,8 @@ import {
     FONT_SIZE,
 } from '~/constants';
 
+import Rectangle from '~/utils/Rectangle';
+
 let cells;
 
 export function init() {
@@ -22,23 +24,22 @@ export function init() {
     });
 
     cells = {};
-    for (let x = 0; x < GAME_WIDTH; x++) {
-        for (let y = 0; y < GAME_HEIGHT; y++) {
-            const cell = cells[`${x},${y}`] = document.createElement('div');
-            Object.assign(cell.style, {
-                width: CELL_WIDTH,
-                height: CELL_HEIGHT,
-                backgroundColor: 'black',
-                color: 'white',
-                position: 'absolute',
-                left: x * CELL_WIDTH,
-                top: y * CELL_HEIGHT,
-                padding: `${CELL_PADDING}px`,
-            });
-            cell.innerHTML = '.';
-            gameContainer.appendChild(cell);
-        }
-    }
+    const gameRectangle = new Rectangle(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    gameRectangle.forEach(({ x, y }) => {
+        const cell = cells[`${x},${y}`] = document.createElement('div');
+        Object.assign(cell.style, {
+            width: CELL_WIDTH,
+            height: CELL_HEIGHT,
+            backgroundColor: 'black',
+            color: 'white',
+            position: 'absolute',
+            left: x * CELL_WIDTH,
+            top: y * CELL_HEIGHT,
+            padding: `${CELL_PADDING}px`,
+        });
+        cell.innerHTML = '.';
+        gameContainer.appendChild(cell);
+    });
 }
 
 export function drawCell(x, y, char, fgColor, bgColor) {

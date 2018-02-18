@@ -1,5 +1,5 @@
-export function randomRange(range) {
-    return Math.round(Math.random() * range);
+export function randomRange(floor, ceiling) {
+    return floor + Math.round(Math.random() * (ceiling - floor));
 }
 
 export function randomDirection() {

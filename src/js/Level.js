@@ -1,9 +1,10 @@
 import Location from '~/components/LocationComponent';
 
+import Rectangle from '~/utils/Rectangle';
+
 import GameObject from '~/GameObject';
 
-import { GAME_WIDTH, GAME_HEIGHT } from '~/constants';
-import { randomRange } from '~/Math2';
+import { MAP_WIDTH, MAP_HEIGHT } from '~/constants';
 import { fillRandom, createPermawall } from '~/map';
 
 import Monster from '~/Monster';
@@ -13,8 +14,9 @@ export default class Level extends GameObject {
         super();
 
         this.level = level;
-        this.width = GAME_WIDTH;
-        this.height = GAME_HEIGHT;
+        this.rectangle = new Rectangle(0, 0, MAP_WIDTH, MAP_HEIGHT);
+        this.width = MAP_WIDTH;
+        this.height = MAP_HEIGHT;
         this.tiles = {};
         this.actors = [];
 
@@ -40,19 +42,15 @@ export default class Level extends GameObject {
         this.actors.forEach(actor => actor.tick());
     }
 
-    getTile(x, y) {
+    getTile({ x, y }) {
         return this.tiles[`${x},${y}`];
     }
     
     getTileByType(type) {
-        let x;
-        let y;
         let tile;
 
         while (!tile || tile.type !== type) {
-            x = randomRange(this.width);
-            y = randomRange(this.height);
-            tile = this.getTile(x, y);
+            tile = this.getTile(this.rectangle.randomPoint());
         }
 
         return tile;
