@@ -1,41 +1,31 @@
-import { randomRange } from '~/Math2';
+export default function(x, y, width, height) {
+    const left = x;
+    const top = y;
+    const right = x + width;
+    const bottom = y + height;
+    return {
+        get left() {
+            return x;
+        },
 
-export default class Rectangle {
-    constructor(x, y, width, height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
+        get top() {
+            return y;
+        },
 
-    get left() {
-        return this.x;
-    }
+        get right() {
+            return right;
+        },
 
-    get top() {
-        return this.y;
-    }
+        get bottom() {
+            return botom;
+        },
 
-    get right() {
-        return this.x + this.width;
-    }
-
-    get bottom() {
-        return this.y + this.height;
-    }
-
-    forEach(callback) {
-        for (let { x } = this; x < this.right; x++) {
-            for (let { y } = this; y < this.bottom; y++) {
-                callback({ x, y });
+        forEach(callback) {
+            for (let ix = left; ix < right; ix++) {
+                for (let iy = top; iy < bottom; iy++) {
+                    callback({ x: ix, y: iy });
+                }
             }
         }
-    }
-
-    randomPoint() {
-        return {
-            x: randomRange(this.left, this.right),
-            y: randomRange(this.top, this.bottom),
-        };
-    }
+    };
 }

@@ -1,9 +1,12 @@
 import { rootReducer } from '~/reducers';
 import createStore from '~/store';
 
-function init() {
-    console.log('Initializing game');
-    window.store = createStore(undefined, rootReducer);
-}
+import { createLevel, loadLevel } from '~/actions/data/levels';
 
-init();
+import { init as initRenderer } from '~/renderer/init';
+
+console.log('Initializing game');
+const store = window.store = createStore(rootReducer);
+initRenderer(store);
+store.dispatch(createLevel(0, Date.now()));
+store.dispatch(loadLevel(0));
