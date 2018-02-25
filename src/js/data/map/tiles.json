@@ -10,5 +10,17 @@
         "foregroundColor": "white",
         "backgroundColor": "black",
         "character": "."
+    },
+    "water": {
+        "walkable": false,
+        "foregroundColor": "blue",
+        "backgroundColor": "black",
+        "character": "÷"
+    },
+    "grass": {
+        "walkable": true,
+        "foregroundColor": "olive",
+        "backgroundColor": "black",
+        "character": "\""
     }
 }
