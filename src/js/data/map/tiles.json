@@ -1,0 +1,14 @@
+{
+    "wall": {
+        "walkable": false,
+        "foregroundColor": "white",
+        "backgroundColor": "black",
+        "character": "#"
+    },
+    "floor": {
+        "walkable": true,
+        "foregroundColor": "white",
+        "backgroundColor": "black",
+        "character": "."
+    }
+}

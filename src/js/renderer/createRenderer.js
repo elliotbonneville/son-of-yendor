@@ -3,7 +3,8 @@ import {
     GAME_HEIGHT,
     CELL_WIDTH,
     CELL_HEIGHT,
-    CELL_PADDING,
+    CELL_PADDING_LEFT,
+    CELL_PADDING_TOP,
     FONT_SIZE,
 } from '~/constants';
 
@@ -38,7 +39,11 @@ const createRenderCells = ({
                 height: CELL_HEIGHT,
                 left: x * CELL_WIDTH,
                 top: y * CELL_HEIGHT,
-                padding: `${CELL_PADDING}px`,
+                textAlign: 'center',
+                verticalAlign: 'middle',
+                lineHeight: `${CELL_HEIGHT}px`,
+                paddingLeft: CELL_PADDING_LEFT,
+                paddingTop: CELL_PADDING_TOP,
             });
             node.appendChild(cell);
             return Object.assign(cells, { [`${x},${y}`]: cell });
