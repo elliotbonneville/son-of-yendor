@@ -1,8 +1,3 @@
-import rectangle from '~/utils/rectangle';
-import requiredProp from '~/utils/requiredProp';
-
-import { LOAD_LEVEL } from '~/actions/data/levels/types';
-
 import {
     GAME_WIDTH,
     GAME_HEIGHT,
@@ -11,6 +6,13 @@ import {
     CELL_PADDING,
     FONT_SIZE,
 } from '~/constants';
+
+import rectangle from '~/utils/rectangle';
+import requiredProp from '~/utils/requiredProp';
+
+import { LOAD_LEVEL } from '~/actions/data/levels/types';
+
+import drawLevel from '~/renderer/drawLevel';
 
 const createRenderCells = ({
     node = requiredProp('node'),
@@ -43,38 +45,6 @@ const createRenderCells = ({
         });
     return cells;
 };
-
-export function drawCell({
-    x = requiredProp('x'),
-    y = requiredProp('y'),
-    cells = requiredProp('cells'),
-
-    character = '.',
-    foregroundColor = 'white',
-    backgroundColor = 'black',
-}) {
-    const cell = cells[`${x},${y}`];
-    Object.assign(cell.style, {
-        color: foregroundColor,
-        backgroundColor,
-    });
-    cell.innerHTML = character;
-}
-
-export function drawLevel({
-    cells = requiredProp('cells'),
-    level = requiredProp('level'),
-}) { 
-    Object.keys(level.tiles).forEach((tile) => {
-        const [x, y] = tile.split(',');
-        drawCell({
-            character: (level.tiles[tile] === 'floor') ? '.' : '#',
-            cells,
-            x,
-            y: Number(y) + 2,
-        });
-    });
-}
 
 const createRenderer = ({
     node = requiredProp('node'),
