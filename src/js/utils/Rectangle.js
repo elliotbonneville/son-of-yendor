@@ -24,7 +24,7 @@ export default function({
         },
 
         get bottom() {
-            return botom;
+            return bottom;
         },
 
         forEach(callback) {
