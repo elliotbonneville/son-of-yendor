@@ -29,11 +29,6 @@ function init() {
     );
 
     store.dispatch(loadLevel(0));
-
-    inputManager.listen({
-        key: 'down',
-        callback: () => console.log('down key pressed'),
-    });
 }
 
 function destroy() {

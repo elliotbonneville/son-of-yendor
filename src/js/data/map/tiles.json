@@ -11,15 +11,21 @@
         "backgroundColor": "black",
         "character": "."
     },
-    "water": {
+    "deep water": {
         "walkable": false,
+        "foregroundColor": "darkblue",
+        "backgroundColor": "black",
+        "character": "÷"
+    },
+    "shallow water": {
+        "walkable": true,
         "foregroundColor": "blue",
         "backgroundColor": "black",
         "character": "÷"
     },
     "grass": {
         "walkable": true,
-        "foregroundColor": "olive",
+        "foregroundColor": "green",
         "backgroundColor": "black",
         "character": "\""
     }

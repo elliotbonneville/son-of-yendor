@@ -1,6 +1,7 @@
 import requiredProp from '~/utils/requiredProp';
 
 const keysByCode = {
+    32: 'space',
     37: 'left',
     38: 'up',
     39: 'right',

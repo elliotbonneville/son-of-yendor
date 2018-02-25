@@ -24,7 +24,14 @@
         {
             "feature": "fill",
             "properties": {
-                "type": "water"
+                "type": "deep water"
+            }
+        },
+        {
+            "feature": "noise",
+            "properties": {
+                "type": "shallow water",
+                "noiseLevel": "0.3"
             }
         },
         {
