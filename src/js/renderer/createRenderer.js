@@ -68,19 +68,20 @@ export function drawLevel({
     Object.keys(level.tiles).forEach((tile) => {
         const [x, y] = tile.split(',');
         drawCell({
-            x,
-            y: Number(y) + 2,
             character: (level.tiles[tile] === 'floor') ? '.' : '#',
             cells,
+            x,
+            y: Number(y) + 2,
         });
     });
 }
 
 const createRenderer = ({
-    width,
-    height,
     node = requiredProp('node'),
     store = requiredProp('store'),
+
+    width,
+    height,
 }) => {
     const cells = createRenderCells({ width, height, node });
     const listenerDefinitions = [

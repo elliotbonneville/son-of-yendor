@@ -5,11 +5,14 @@ export default function store(reducer, initialState = {}) {
     const getState = () => state;
 
     const dispatch = (action) => {
+        const previousState = state;
         state = reducer(state, action);
         
         const actionListeners = listeners[action.type];
         if (actionListeners) {
-            actionListeners.forEach(listener => listener(action, state));
+            actionListeners.forEach(
+                listener => listener(action, state, previousState),
+            );
         }
     };
 
