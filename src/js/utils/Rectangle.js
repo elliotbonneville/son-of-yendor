@@ -1,4 +1,11 @@
-export default function(x, y, width, height) {
+import requiredProp from '~/utils/requiredProp';
+
+export default function({
+    x = 0,
+    y = 0,
+    width = requiredProp('width'),
+    height = requiredProp('height')
+}) {
     const left = x;
     const top = y;
     const right = x + width;
@@ -26,6 +33,12 @@ export default function(x, y, width, height) {
                     callback({ x: ix, y: iy });
                 }
             }
+        },
+
+        reduce(reducer, initialValue) {
+            let value = initialValue;
+            this.forEach(coordinates => (value = reducer(value, coordinates)));
+            return value;
         }
     };
 }

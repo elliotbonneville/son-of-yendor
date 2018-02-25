@@ -1,16 +1,18 @@
 import seedRandom from 'seedrandom';
 
-import Rectangle from '~/utils/Rectangle';
+import rectangle from '~/utils/rectangle';
 
 import { MAP_WIDTH, MAP_HEIGHT } from '~/constants';
 
 function createLevel(seed) {
     const rng = seedRandom(seed);
-    const tiles = {};
-    Rectangle(0, 0, MAP_WIDTH, MAP_HEIGHT).forEach(({ x, y }) => {
-        tiles[`${x},${y}`] = rng() < 0.7 ? 'floor' : 'wall';
-    });
-    return tiles;
+    return rectangle({ width: MAP_WIDTH, height: MAP_HEIGHT })
+        .reduce(
+            (tiles = {}, { x, y }) => Object.assign( 
+                tiles,
+                { [`${x},${y}`]: (rng() < 0.7) ? 'floor' : 'wall' },
+            ),
+        );
 }
 
 export default (state, { id, seed }) => ({

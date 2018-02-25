@@ -22,7 +22,13 @@ export default function store(reducer, initialState = {}) {
         })
     };
 
-    const stopListening = (actions, listener) => {};
+    const stopListening = (actions, listener) => {
+        actions.forEach(actionType => {
+            listeners[actionType] = listeners[actionType].filter(
+                actionListener => actionListener !== listener,
+            );
+        });
+    };
 
     dispatch({ type: 'INIT' });
     return { getState, dispatch, listen, stopListening };
