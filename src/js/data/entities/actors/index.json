@@ -1,0 +1,14 @@
+{
+    "player": {
+        "data": {
+            "corpse": "%",
+            "health": 10,
+            "speed": 100
+        },
+        "metadata": {
+            "character": "@",
+            "foregroundColor": "red",
+            "backgroundColor": "black"
+        }
+    }
+}

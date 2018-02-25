@@ -1,0 +1,1 @@
+export createActor from './createActor';

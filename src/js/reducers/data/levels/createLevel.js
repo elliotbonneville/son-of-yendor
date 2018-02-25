@@ -18,7 +18,7 @@ function createLevelFactory(...features) {
     );
 }
 
-const dungeonGenerators = Object.keys(levelDefinitions).reduce(
+const levelGenerators = Object.keys(levelDefinitions).reduce(
     (accumulator, definitionName) => {
         const definition = levelDefinitions[definitionName];
         const features = definition.map(
@@ -34,7 +34,7 @@ const dungeonGenerators = Object.keys(levelDefinitions).reduce(
 );
 
 function createLevel({ seed, levelType }) {
-    return dungeonGenerators[levelType]({
+    return levelGenerators[levelType]({
         bounds: rectangle({ width: MAP_WIDTH, height: MAP_HEIGHT }),
         rng: seedRandom(seed),
     });

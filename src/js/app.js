@@ -15,8 +15,6 @@ const inputManager = createInputManager({ store });
 const renderer = createRenderer({ container, store });
 
 function init() {
-    console.log('Initializing game');
-
     inputManager.init();
     renderer.init();
 

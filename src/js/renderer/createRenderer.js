@@ -12,8 +12,10 @@ import rectangle from '~/utils/rectangle';
 import requiredProp from '~/utils/requiredProp';
 
 import { LOAD_LEVEL } from '~/actions/data/levels/types';
+import { CREATE_ACTOR } from '~/actions/data/entities/actors/types';
 
 import drawLevel from '~/renderer/drawLevel';
+import { drawActor } from '~/renderer/entities/actors';
 
 const createRenderCells = ({
     width = GAME_WIDTH,
