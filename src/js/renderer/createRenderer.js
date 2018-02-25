@@ -16,49 +16,46 @@ import { LOAD_LEVEL } from '~/actions/data/levels/types';
 import drawLevel from '~/renderer/drawLevel';
 
 const createRenderCells = ({
-    node = requiredProp('node'),
     width = GAME_WIDTH,
     height = GAME_HEIGHT,
 }) => {
-    Object.assign(node.style, {
-        width: width * CELL_WIDTH,
-        height: height * CELL_HEIGHT,
-        backgroundColor: 'black',
-        fontFamily: 'VideoTerminalScreen',
-        position: 'absolute',
-        fontSize: `${FONT_SIZE}px`,
-        textAlign: 'center',
+    const cells = {};
+    const domNode = document.createElement('div');
+
+    rectangle({ width, height }).forEach(({ x, y }) => {
+        const cell = document.createElement('div');
+        Object.assign(cell.style, {
+            fontFamily: 'VideoTerminalScreen',
+            fontSize: `${FONT_SIZE}px`,
+            position: 'absolute',
+            width: CELL_WIDTH,
+            height: CELL_HEIGHT,
+            left: x * CELL_WIDTH,
+            top: y * CELL_HEIGHT,
+            textAlign: 'center',
+            verticalAlign: 'middle',
+            lineHeight: `${CELL_HEIGHT}px`,
+            paddingLeft: CELL_PADDING_LEFT,
+            paddingTop: CELL_PADDING_TOP,
+        });
+        domNode.appendChild(cell);
+        Object.assign(cells, { [`${x},${y}`]: cell });
     });
 
-    const cells = rectangle({ width, height })
-        .reduce((cells = {}, { x, y }) => {
-            const cell = document.createElement('div');
-            Object.assign(cell.style, {
-                position: 'absolute',
-                width: CELL_WIDTH,
-                height: CELL_HEIGHT,
-                left: x * CELL_WIDTH,
-                top: y * CELL_HEIGHT,
-                textAlign: 'center',
-                verticalAlign: 'middle',
-                lineHeight: `${CELL_HEIGHT}px`,
-                paddingLeft: CELL_PADDING_LEFT,
-                paddingTop: CELL_PADDING_TOP,
-            });
-            node.appendChild(cell);
-            return Object.assign(cells, { [`${x},${y}`]: cell });
-        });
-    return cells;
+    return { domNode, cells };
 };
 
 const createRenderer = ({
-    node = requiredProp('node'),
+    container = requiredProp('container'),
     store = requiredProp('store'),
 
     width,
     height,
 }) => {
-    const cells = createRenderCells({ width, height, node });
+    let cells;
+    let domNode;
+    let listenerRemovers;
+
     const listenerDefinitions = [
         {
             actions: [LOAD_LEVEL],
@@ -68,15 +65,19 @@ const createRenderer = ({
             }),
         },   
     ];
-    const listeners = listenerDefinitions.map(
-        ({ actions, callback }) => store.listen(actions, callback),
-    );
-
-    return () => {
-        node.innerHTML = '';
-        listenerDefinitions.forEach(({ actions }, i) => {
-            store.stopListening(actions, listeners[i]);
-        });
+    
+    return {
+        init: () => {
+            ({ domNode, cells } = createRenderCells({ width, height }));
+            container.appendChild(domNode);
+            listenerRemovers = listenerDefinitions.map(
+                ({ actions, callback }) => store.listen(actions, callback),
+            );
+        },
+        destroy: () => {
+            container.removeChild(domNode);
+            listenerRemovers.forEach(remover => remover());
+        },
     };
 };
 

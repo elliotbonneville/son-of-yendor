@@ -17,22 +17,22 @@ export default function store(reducer, initialState = {}) {
     };
 
     const listen = (actions, callback) => {
-        actions.forEach(actionType => {
+        actions.forEach((actionType) => {
+            // create a listener for each action using the callback
             listeners[actionType] = [
                 ...(listeners[actionType] || []),
                 callback,
             ];
-        })
-    };
+        });
 
-    const stopListening = (actions, listener) => {
-        actions.forEach(actionType => {
+        // return a function to remove all of the listeners just created
+        return () => actions.forEach(actionType => {
             listeners[actionType] = listeners[actionType].filter(
-                actionListener => actionListener !== listener,
+                actionListener => actionListener !== callback,
             );
         });
     };
 
     dispatch({ type: 'INIT' });
-    return { getState, dispatch, listen, stopListening };
+    return { getState, dispatch, listen };
 }
