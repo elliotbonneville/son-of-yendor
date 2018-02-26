@@ -10,9 +10,23 @@ export default function ({
     backgroundColor = 'black',
 }) {
     const cell = cells[`${x},${y}`];
-    Object.assign(cell.style, {
-        color: foregroundColor,
-        backgroundColor,
-    });
-    cell.innerHTML = character;
+
+    const {
+        color: currentForegroundColor,
+        backgroundColor: currentBackgroundColor,
+    } = cell.style;
+
+    if (
+        currentBackgroundColor !== backgroundColor ||
+        currentForegroundColor !== foregroundColor
+    ) {
+        Object.assign(cell.style, {
+            color: foregroundColor,
+            backgroundColor,
+        });
+    }
+
+    if (cell.innerHTML !== character) {
+        cell.innerHTML = character;
+    }
 }

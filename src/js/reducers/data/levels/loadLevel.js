@@ -1,9 +1,9 @@
 export default function(state, { id }) {
-    return Object.keys(state).reduce(
-        (newState, levelId) => ({
+    return Object.entries(state).reduce(
+        (newState, [levelId, level]) => ({
             ...newState,
             [levelId]: {
-                ...state[levelId],
+                ...level,
                 active: levelId == id,
             },
         }),

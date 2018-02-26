@@ -60,11 +60,15 @@ const createRenderer = ({
 
     const listenerDefinitions = [
         {
-            actions: [LOAD_LEVEL],
-            callback: ({ id }, state) => drawLevel({
-                cells,
-                level: state.data.levels[id],
-            }),
+            actions: [LOAD_LEVEL, CREATE_ACTOR],
+            callback: ({ id }, state) => {
+                drawLevel({
+                    cells,
+                    level: Object.entries(state.data.levels).filter(
+                        ([,level]) => level.active === true
+                    )[0][1],
+                });
+            },
         },   
     ];
     
