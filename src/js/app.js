@@ -1,13 +1,13 @@
 // model
-import { rootReducer } from '~/reducers';
-import createStore from '~/store';
-import { createLevel, loadLevel } from '~/actions/data/levels';
+import { rootReducer } from '~/model';
+import createStore from '~/model/store';
+import createLevel from '~/model/features/level/createLevel.action';
 
 // view
-import { createRenderer } from '~/renderer';
+import { createRenderer } from '~/view/renderer';
 
 // controller
-import { createInputManager } from '~/input';
+import { createInputManager } from '~/controller/input';
 
 const container = document.getElementById('app');
 const store = createStore(rootReducer);
@@ -20,13 +20,10 @@ function init() {
 
     store.dispatch(
         createLevel({
-            id: 0,
             seed: Date.now(),
             levelType: 'plain',
         }),
     );
-
-    store.dispatch(loadLevel(0));
 }
 
 function destroy() {
