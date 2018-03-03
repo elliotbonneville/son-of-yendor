@@ -1,0 +1,1 @@
+export drawActor from './draw';

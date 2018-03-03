@@ -1,0 +1,32 @@
+{
+    "wall": {
+        "walkable": false,
+        "foregroundColor": "white",
+        "backgroundColor": "black",
+        "character": "#"
+    },
+    "floor": {
+        "walkable": true,
+        "foregroundColor": "white",
+        "backgroundColor": "black",
+        "character": "."
+    },
+    "deep water": {
+        "walkable": false,
+        "foregroundColor": "darkblue",
+        "backgroundColor": "black",
+        "character": "÷"
+    },
+    "shallow water": {
+        "walkable": true,
+        "foregroundColor": "blue",
+        "backgroundColor": "black",
+        "character": "÷"
+    },
+    "grass": {
+        "walkable": true,
+        "foregroundColor": "green",
+        "backgroundColor": "black",
+        "character": "\""
+    }
+}

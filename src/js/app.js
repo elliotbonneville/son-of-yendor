@@ -1,32 +1,43 @@
-import Location from '~/components/LocationComponent';
+// model
+import { rootReducer } from '~/reducers';
+import createStore from '~/store';
+import { createLevel, loadLevel } from '~/actions/data/levels';
 
-import * as input from '~/input';
-import * as renderer from '~/renderer';
+// view
+import { createRenderer } from '~/renderer';
 
-import Level from '~/Level';
-import Player from '~/Player';
+// controller
+import { createInputManager } from '~/input';
 
-let currentLevel;
-let monsters = [];
+const container = document.getElementById('app');
+const store = createStore(rootReducer);
+const inputManager = createInputManager({ store });
+const renderer = createRenderer({ container, store });
 
 function init() {
-    console.log('Initializing game');
-
-    input.init();
+    inputManager.init();
     renderer.init();
-    
-    currentLevel = new Level(1);
 
-    const location = currentLevel
-        .getTileByType('floor')
-        .getComponent(Location);
-    const player = new Player(currentLevel, location.x, location.y);
-    player.update();
+    store.dispatch(
+        createLevel({
+            id: 0,
+            seed: Date.now(),
+            levelType: 'plain',
+        }),
+    );
+
+    store.dispatch(loadLevel(0));
 }
 
-export function tick() {
-    console.log('Game tick');
-    currentLevel.tick();
+function destroy() {
+    renderer.destroy();
 }
+
+window.game = {
+    destroy,
+    init,
+    renderer,
+    store,
+};
 
 init();

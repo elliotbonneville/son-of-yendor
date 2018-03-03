@@ -1,6 +1,6 @@
 import Location from '~/components/LocationComponent';
 
-import Rectangle from '~/utils/Rectangle';
+import rectangle from '~/utils/rectangle';
 
 import GameObject from '~/GameObject';
 
@@ -14,7 +14,7 @@ export default class Level extends GameObject {
         super();
 
         this.level = level;
-        this.rectangle = new Rectangle(0, 0, MAP_WIDTH, MAP_HEIGHT);
+        this.rectangle = rectangle(0, 0, MAP_WIDTH, MAP_HEIGHT);
         this.width = MAP_WIDTH;
         this.height = MAP_HEIGHT;
         this.tiles = {};

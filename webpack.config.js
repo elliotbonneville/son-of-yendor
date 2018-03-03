@@ -9,16 +9,21 @@ module.exports = {
         publicPath: '/',
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['@babel/preset-env']
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: [
+                            require('@babel/plugin-proposal-export-default-from'),
+                            require('@babel/plugin-proposal-object-rest-spread')
+                        ],
+                    }
                 }
             },
-        ],
-        rules: [
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],

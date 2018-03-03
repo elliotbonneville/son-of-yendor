@@ -1,0 +1,59 @@
+{
+    "plain": [
+        {
+            "feature": "fill",
+            "properties": {
+                "type": "floor"
+            }
+        },
+        {
+            "feature": "noise",
+            "properties": {
+                "type": "wall",
+                "noiseLevel": "0.2"
+            }
+        },
+        {
+            "feature": "borders",
+            "properties": {
+                "type": "wall"
+            }
+        }
+    ],
+    "lake": [
+        {
+            "feature": "fill",
+            "properties": {
+                "type": "deep water"
+            }
+        },
+        {
+            "feature": "noise",
+            "properties": {
+                "type": "shallow water",
+                "noiseLevel": "0.3"
+            }
+        },
+        {
+            "feature": "borders",
+            "properties": {
+                "type": "wall"
+            }
+        }
+    ],
+    "grassy plain": [
+        {
+            "feature": "fill",
+            "properties": {
+                "type": "floor"
+            }
+        },
+        {
+            "feature": "noise",
+            "properties": {
+                "type": "grass",
+                "noiseLevel": 0.7
+            }
+        }
+    ]
+}
