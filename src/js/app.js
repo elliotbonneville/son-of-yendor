@@ -8,17 +8,21 @@ import { createRenderer } from '~/view/renderer';
 import View from '~/view';
 
 // controller
-import { createInputManager } from '~/controller/input';
+import createController from '~/controller';
 
 const container = document.getElementById('app');
 const store = createStore(rootReducer);
-const inputManager = createInputManager({ store });
 const renderer = createRenderer({ container });
-const view = View(store, renderer);
+const controller = createController({ store, renderer });
+const view = View({
+    store,
+    renderer,
+    controller,
+});
 
 function init() {
-    inputManager.init();
     renderer.init();
+    controller.init();
 
     store.dispatch(
         createLevel({

@@ -39,6 +39,15 @@ export default function({
             let value = initialValue;
             this.forEach(coordinates => (value = reducer(value, coordinates)));
             return value;
+        },
+
+        contains({ x, y }) {
+            return (
+                x >= this.left &&
+                x < this.right &&
+                y >= this.top &&
+                y < this.bottom
+            );
         }
     };
 }

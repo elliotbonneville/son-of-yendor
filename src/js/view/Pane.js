@@ -12,10 +12,7 @@ export default class Pane {
         state = {},
         selectState = () => {},
     }) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        this.bounds = rectangle({ x, y, width, height });
 
         this.children = children;
         this.state = state;
@@ -26,9 +23,23 @@ export default class Pane {
 
     // blit output of data onto a renderer
     blit({ renderer = requiredProp('renderer') }) {
-        const bounds = rectangle(this);
-        bounds.forEach(({ x, y }) => {
+        this.bounds.forEach(({ x, y }) => {
             renderer.drawCell({ x, y, cellData: this.cells[`${x},${y}`] });
+        });
+    }
+
+    handleMouseEvent = ({
+        event = requiredProp('event'),
+        location = requiredProp('location'),
+    }) => {
+        const { x, y } = location;
+        const relativeLocation = {
+            x: x - this.bounds.left,
+            y: y - this.bounds.top,
+        };
+        this.children.forEach(child => {
+            if (!child.bounds.contains(relativeLocation)) return;
+            child.handleMouseEvent({ event, location: relativeLocation })
         });
     }
 
@@ -37,14 +48,18 @@ export default class Pane {
         this.cells = this.children.reduce(
             (cells, child) => {
                 const renderData = child.render({
-                    offsetX: offsetX + this.x,
-                    offsetY: offsetY + this.y,
+                    offsetX: offsetX + this.bounds.left,
+                    offsetY: offsetY + this.bounds.top,
                 });
                 if (!renderData) return cells;
                 Object.entries(renderData).forEach(([coordinates, cell]) => {
                     const [cellX, cellY] = coordinates.split(',');
-                    const x = Number(cellX) + Number(child.x) + Number(offsetX);
-                    const y = Number(cellY) + Number(child.y) + Number(offsetY);
+                    const x = Number(cellX)
+                        + Number(child.bounds.left)
+                        + Number(offsetX);
+                    const y = Number(cellY)
+                        + Number(child.bounds.top)
+                        + Number(offsetY);
                     cells[`${x},${y}`] = cell;
                 });
                 return cells;

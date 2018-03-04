@@ -35,6 +35,8 @@ const createRenderCells = ({
             lineHeight: `${CELL_HEIGHT}px`,
             paddingLeft: CELL_PADDING_LEFT,
             paddingTop: CELL_PADDING_TOP,
+            cursor: 'pointer',
+            userSelect: 'none',
         });
         domNode.appendChild(cell);
         Object.assign(cells, { [`${x},${y}`]: cell });
@@ -51,6 +53,9 @@ const createRenderer = ({
     let cells;
     let domNode;
     return {
+        get cells() {
+            return cells;
+        },
         drawCell: (options) => {
             drawCell({ cells, ...options });
         },

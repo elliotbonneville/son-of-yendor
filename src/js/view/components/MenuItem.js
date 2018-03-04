@@ -14,5 +14,10 @@ export default ({ active, text, y }) => new Component({
             text: active ? `>${text}<` : text,
             foregroundColor: active ? 'red' : 'white',
         });
-    }
+    },
+    mouseListeners: {
+        'mousedown': [
+            function () {},
+        ],
+    },
 });
