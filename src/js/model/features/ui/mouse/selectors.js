@@ -1,6 +1,6 @@
 import rectangle from '~/utils/rectangle';
 
-import ui from './selector';
+import ui from '../selectors';
 
 export function mouseDown(state) {
     return ui(state).mouseDown;

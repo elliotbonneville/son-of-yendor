@@ -5,16 +5,10 @@ import rectangle from '~/utils/rectangle';
 import Component from '~/view/Component';
 import Cell from '~/view/Cell';
 
-// Actions
-import setMouseDown from '~/model/features/ui/setMouseDown.action';
-import setMousePosition from '~/model/features/ui/setMousePosition.action';
-
-// Selectors
 import {
-    mouseDown,
-    selectionBounds,
-    mousePosition,
-} from '~/model/features/ui/mouse.selector';
+    actions as mouseActions,
+    selectors as mouseSelectors,
+} from '~/model/features/ui/mouse/';
 
 export default store => new Component({
     x: 0,
@@ -23,9 +17,9 @@ export default store => new Component({
     height: MAP_HEIGHT,
     selectState: (state) => {
         const newState = {
-            mouseDown: mouseDown(state),
-            mousePosition: mousePosition(state),
-            selectionBounds: rectangle(selectionBounds(state)),
+            mouseDown: mouseSelectors.mouseDown(state),
+            mousePosition: mouseSelectors.mousePosition(state),
+            selectionBounds: rectangle(mouseSelectors.selectionBounds(state)),
         };
         return newState;
     },
@@ -33,7 +27,7 @@ export default store => new Component({
         mousedown: [
             function({ location }) {
                 store.dispatch(
-                    setMouseDown({
+                    mouseActions.setMouseDown({
                         mouseDown: true,
                         mouseDownPosition: location
                     }),
@@ -43,7 +37,7 @@ export default store => new Component({
         mouseup: [
             function ({ location }) {
                 store.dispatch(
-                    setMouseDown({
+                    mouseActions.setMouseDown({
                         mouseDown: false,
                         mouseDownPosition: location
                     }),
@@ -53,7 +47,9 @@ export default store => new Component({
         mouseenter: [
             function ({ location }) {
                 if (!this.state.mouseDown) return;
-                store.dispatch(setMousePosition({ mousePosition: location }));
+                store.dispatch(
+                    mouseActions.setMousePosition({ mousePosition: location }),
+                );
             }
         ],
     },

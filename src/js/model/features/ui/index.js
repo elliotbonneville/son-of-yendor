@@ -1,20 +1,14 @@
 import { createReducer } from '~/model/utils';
 
-import setMode from './setMode.reducer';
-import setMouseDown from './setMouseDown.reducer';
-import setMousePosition from './setMousePosition.reducer';
-
-import { SET_MODE, SET_MOUSE_DOWN, SET_MOUSE_POSITION } from './types';
+import { reducers as mouseReducers } from './mouse';
+import { defaultMode, reducers as modeReducers } from './mode';
 
 export default createReducer(
     {
         mouseDown: false,
         mousePosition: null,
         mouseDownPosition: null,
+        mode: defaultMode,
     },
-    {
-        [SET_MODE]: setMode,
-        [SET_MOUSE_DOWN]: setMouseDown,
-        [SET_MOUSE_POSITION]: setMousePosition,
-    },
+    { ...mouseReducers, ...modeReducers },
 );
