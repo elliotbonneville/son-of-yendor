@@ -1,5 +1,5 @@
 export default function store(reducer, initialState = {}) {
-    const listeners = {};
+    const listeners = []
     let state = initialState;
     
     const getState = () => state;
@@ -7,30 +7,16 @@ export default function store(reducer, initialState = {}) {
     const dispatch = (action) => {
         const previousState = state;
         state = reducer(state, action);
-        
-        const actionListeners = listeners[action.type];
-        if (actionListeners) {
-            actionListeners.forEach(
-                listener => listener(action, state, previousState),
-            );
-        }
+        listeners.forEach(listener => listener(state));
     };
 
-    const listen = (actions, callback) => {
-        actions.forEach((actionType) => {
-            // create a listener for each action using the callback
-            listeners[actionType] = [
-                ...(listeners[actionType] || []),
-                callback,
-            ];
-        });
+    const listen = (callback) => {
+        listeners.push(callback);
 
         // return a function to remove all of the listeners just created
-        return () => actions.forEach(actionType => {
-            listeners[actionType] = listeners[actionType].filter(
-                actionListener => actionListener !== callback,
-            );
-        });
+        return () => {
+            listeners = listeners.filter(listener => listener !== callback);
+        };
     };
 
     dispatch({ type: 'INIT' });

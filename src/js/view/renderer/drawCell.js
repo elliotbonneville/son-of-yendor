@@ -4,13 +4,14 @@ export default function ({
     x = requiredProp('x'),
     y = requiredProp('y'),
     cells = requiredProp('cells'),
-
-    character = '.',
-    foregroundColor = 'white',
-    backgroundColor = 'black',
+    cellData = {},
 }) {
     const cell = cells[`${x},${y}`];
-
+    const {
+        character = '.',
+        foregroundColor = 'white',
+        backgroundColor = 'black',
+    } = cellData;
     const {
         color: currentForegroundColor,
         backgroundColor: currentBackgroundColor,

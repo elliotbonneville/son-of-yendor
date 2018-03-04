@@ -19,7 +19,8 @@ module.exports = {
                         presets: ['@babel/preset-env'],
                         plugins: [
                             require('@babel/plugin-proposal-export-default-from'),
-                            require('@babel/plugin-proposal-object-rest-spread')
+                            require('@babel/plugin-proposal-object-rest-spread'),
+                            require('@babel/plugin-proposal-export-namespace-from')
                         ],
                     }
                 }

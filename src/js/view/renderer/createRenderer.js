@@ -11,9 +11,7 @@ import {
 import rectangle from '~/utils/rectangle';
 import requiredProp from '~/utils/requiredProp';
 
-import { CREATE_LEVEL } from '~/model/features/level/types';
-
-import drawLevel from './drawLevel';
+import drawCell from './drawCell';
 
 const createRenderCells = ({
     width = GAME_WIDTH,
@@ -47,35 +45,21 @@ const createRenderCells = ({
 
 const createRenderer = ({
     container = requiredProp('container'),
-    store = requiredProp('store'),
-
     width,
     height,
 }) => {
     let cells;
     let domNode;
-    let listenerRemovers;
-
-    const listenerDefinitions = [
-        {
-            actions: [CREATE_LEVEL],
-            callback: ({ id }, state) => {
-                drawLevel({ cells, level: state.level });
-            },
-        },   
-    ];
-    
     return {
+        drawCell: (options) => {
+            drawCell({ cells, ...options });
+        },
         init: () => {
             ({ domNode, cells } = createRenderCells({ width, height }));
             container.appendChild(domNode);
-            listenerRemovers = listenerDefinitions.map(
-                ({ actions, callback }) => store.listen(actions, callback),
-            );
         },
         destroy: () => {
             container.removeChild(domNode);
-            listenerRemovers.forEach(remover => remover());
         },
     };
 };

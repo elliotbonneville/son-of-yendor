@@ -55,5 +55,13 @@
                 "noiseLevel": 0.7
             }
         }
+    ],
+    "cavern": [
+        {
+            "feature": "borders",
+            "properties": {
+                "type": "wall"
+            }
+        }
     ]
 }

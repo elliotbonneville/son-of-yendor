@@ -5,6 +5,7 @@ import createLevel from '~/model/features/level/createLevel.action';
 
 // view
 import { createRenderer } from '~/view/renderer';
+import View from '~/view';
 
 // controller
 import { createInputManager } from '~/controller/input';
@@ -12,7 +13,8 @@ import { createInputManager } from '~/controller/input';
 const container = document.getElementById('app');
 const store = createStore(rootReducer);
 const inputManager = createInputManager({ store });
-const renderer = createRenderer({ container, store });
+const renderer = createRenderer({ container });
+const view = View(store, renderer);
 
 function init() {
     inputManager.init();
@@ -21,7 +23,7 @@ function init() {
     store.dispatch(
         createLevel({
             seed: Date.now(),
-            levelType: 'plain',
+            levelType: 'cavern',
         }),
     );
 }
