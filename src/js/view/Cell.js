@@ -2,9 +2,9 @@ import requiredProp from '~/utils/requiredProp';
 
 export default class Cell {
     constructor({
-        character = requiredProp('character'),
-        foregroundColor = 'white',
-        backgroundColor = 'black',
+        character,
+        foregroundColor,
+        backgroundColor,
     }) {
         this.character = character;
         this.foregroundColor = foregroundColor;

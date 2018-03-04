@@ -27,6 +27,14 @@ export default function({
             return bottom;
         },
 
+        get width() {
+            return this.right - this.left;
+        },
+
+        get height() {
+            return this.bottom - this.top;
+        },
+
         forEach(callback) {
             for (let ix = left; ix < right; ix++) {
                 for (let iy = top; iy < bottom; iy++) {

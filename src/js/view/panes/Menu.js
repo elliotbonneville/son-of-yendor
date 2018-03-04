@@ -10,7 +10,7 @@ export default () => new Pane({
     width: GAME_WIDTH - MAP_WIDTH,
     height: GAME_HEIGHT,
     selectState() {
-        this.setState({
+        const newState = {
             items: [
                 {
                     text: 'Default',
@@ -26,11 +26,13 @@ export default () => new Pane({
                     text: 'Items',
                 },
             ],
-        });
+        };
 
-        this.children = this.state.items.map(({ text, active }, i) =>
+        this.children = newState.items.map(({ text, active }, i) =>
             MenuItem({ text, y: i + 3, active }),
         );
+
+        return newState;
     },
     children: [],
 });

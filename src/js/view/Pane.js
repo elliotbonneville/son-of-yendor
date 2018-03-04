@@ -8,15 +8,17 @@ export default class Pane {
         width = requiredProp('width'),
         height = requiredProp('height'),
 
+        mouseListeners = {},
         children = [],
         state = {},
-        selectState = () => {},
+        selectState = state => state,
     }) {
         this.bounds = rectangle({ x, y, width, height });
 
         this.children = children;
         this.state = state;
         this.selectState = selectState;
+        this.mouseListeners = mouseListeners;
 
         this.cells = {};
     }
@@ -37,6 +39,23 @@ export default class Pane {
             x: x - this.bounds.left,
             y: y - this.bounds.top,
         };
+
+        // Handle any mouse events on this Pane
+        let shouldPropagate = true;
+        let handlers = this.mouseListeners[event.type];
+        if (handlers) {
+            handlers.forEach(
+                handler => handler({
+                    event,
+                    location: relativeLocation,
+                    stopPropagation: () => (shouldPropagate = false),
+                }),
+            );
+        }
+        
+        if (!shouldPropagate) return;
+
+        // If possible, pass down to children
         this.children.forEach(child => {
             if (!child.bounds.contains(relativeLocation)) return;
             child.handleMouseEvent({ event, location: relativeLocation })
@@ -70,15 +89,16 @@ export default class Pane {
         return this.cells;
     }
 
-    setState(newState) {
-        const oldState = this.state;
-        this.state = Object.assign(oldState, newState);
-    }
-
     // Propagate state to children
     onStateChange = (newState) => {
-        this.selectState(newState);
+        const oldState = this.state;
+
+        // Get new state from state object
+        this.state = this.selectState(newState);
+
+        // If nothing has changed, don't cause children to re-render
+        if (this.state === oldState) return;
+
         this.children.forEach(child => child.onStateChange(newState));
-        this.cells = this.render(this.state);
     }
 }

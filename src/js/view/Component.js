@@ -7,16 +7,18 @@ export default class Component {
         y = requiredProp('y'),
         width = requiredProp('width'),
         height = requiredProp('height'),
-        selectState = requiredProp('selectState'),
         render = requiredProp('render'),
+
+        state = {},
         mouseListeners = {},
+
+        selectState = state => state,
     }) {
         this.bounds = rectangle({ x, y, width, height });
         this.cells = {};
         this.render = render;
-        this.state = {};
+        this.state = state;
         this.mouseListeners = mouseListeners;
-
         this.selectState = selectState;
     }
 
@@ -37,13 +39,11 @@ export default class Component {
         );
     }
 
-    setState(newState) {
-        const oldState = this.state;
-        this.state = Object.assign(oldState, newState);
-        this.cells = this.render(this.state);
-    }
-
     onStateChange(newState) {
-        this.selectState(newState);
+        if (!this.selectState) return;
+        const oldState = this.state;
+        const newSelectedState = this.selectState(newState);
+        if (oldState === newSelectedState) return;
+        this.state = newSelectedState;
     }
 }

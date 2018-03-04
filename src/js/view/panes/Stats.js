@@ -17,7 +17,7 @@ export default () => new Pane({
             width: 12,
             height: 1,
             selectState(newState) {
-                this.setState({ gems: 5000 });
+                return { gems: 5000 };
             },
             render() {
                 return label({
@@ -33,7 +33,7 @@ export default () => new Pane({
             width: 7,
             height: 1,
             selectState(newState) {
-                this.setState({ mana: 100 });
+                return { mana: 100 };
             },
             render() {
                 return label({

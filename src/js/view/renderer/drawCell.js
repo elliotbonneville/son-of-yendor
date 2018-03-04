@@ -7,19 +7,15 @@ export default function ({
     cellData = {},
 }) {
     const cell = cells[`${x},${y}`];
-    const {
-        character = ' ',
-        foregroundColor = 'white',
-        backgroundColor = 'black',
-    } = cellData;
+    const { character, foregroundColor, backgroundColor } = cellData;
     const {
         color: currentForegroundColor,
         backgroundColor: currentBackgroundColor,
     } = cell.style;
 
     if (
-        currentBackgroundColor !== backgroundColor ||
-        currentForegroundColor !== foregroundColor
+        (backgroundColor && currentBackgroundColor !== backgroundColor) ||
+        (foregroundColor && currentForegroundColor !== foregroundColor)
     ) {
         Object.assign(cell.style, {
             color: foregroundColor,
@@ -27,7 +23,7 @@ export default function ({
         });
     }
 
-    if (cell.innerHTML !== character) {
+    if (character && cell.innerHTML !== character) {
         cell.innerHTML = character;
     }
 }

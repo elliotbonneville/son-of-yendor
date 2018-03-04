@@ -16,8 +16,7 @@ export default () => new Component({
         const level = getLevel(newState);
         
         // Don't update the level if it hasn't changed yet
-        if (level === this.state.level) return;
-        this.setState({ level });
+        return { level };
     },
     render() {
         const { level } = this.state;

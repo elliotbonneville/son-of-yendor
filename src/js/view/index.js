@@ -9,6 +9,7 @@ import Menu from '~/view/panes/Menu';
 
 // Components
 import Map from '~/view/components/Map';
+import MapControls from '~/view/components/MapControls';
 
 import { GAME_WIDTH, GAME_HEIGHT } from '~/constants';
 
@@ -30,6 +31,7 @@ export default ({
 
             // Components
             Map(),
+            MapControls(store),
         ],
     });
 

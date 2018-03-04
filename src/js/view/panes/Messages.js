@@ -9,8 +9,8 @@ export default () => new Pane({
     y: 1 + MAP_HEIGHT,
     width: GAME_WIDTH - 10,
     height: GAME_HEIGHT - 1 - MAP_HEIGHT,
-    selectState(newState) {
-        this.setState({
+    selectState() {
+        const selectedState = {
             scrollback: 0,
             messages: [
                 'hello world',
@@ -19,10 +19,12 @@ export default () => new Pane({
                 'another delicious message',
                 'nom nom nom',
             ],
-        });
+        };
 
-        this.children = this.state.messages.map(
+        this.children = selectedState.messages.map(
             (message, i) => Message({ message, y: i }),
         );
+
+        return selectedState;
     },
 });
