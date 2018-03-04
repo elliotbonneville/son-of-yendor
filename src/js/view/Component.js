@@ -4,7 +4,7 @@ export default class Component {
     constructor({
         x = requiredProp('x'),
         y = requiredProp('y'),
-        onStateChange = requiredProp('onStateChange'),
+        selectState = requiredProp('selectState'),
         render = requiredProp('render'),
     }) {
         this.x = x;
@@ -13,13 +13,16 @@ export default class Component {
         this.render = render;
         this.state = {};
 
-        this.render = render;
-        this.onStateChange = onStateChange;
+        this.selectState = selectState;
     }
 
     setState(newState) {
         const oldState = this.state;
         this.state = Object.assign(oldState, newState);
         this.cells = this.render(this.state);
+    }
+
+    onStateChange(newState) {
+        this.selectState(newState);
     }
 }

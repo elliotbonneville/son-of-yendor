@@ -37,6 +37,7 @@ window.game = {
     init,
     renderer,
     store,
+    view,
 };
 
 init();

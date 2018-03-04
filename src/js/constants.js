@@ -1,7 +1,7 @@
 export const GAME_WIDTH = 80;
 export const GAME_HEIGHT = 24;
 export const MAP_WIDTH = 70;
-export const MAP_HEIGHT = 20;
+export const MAP_HEIGHT = 18;
 export const CELL_WIDTH = 16;
 export const CELL_HEIGHT = 23;
 export const CELL_PADDING_LEFT = 1;

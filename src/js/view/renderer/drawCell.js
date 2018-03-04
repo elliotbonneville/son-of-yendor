@@ -8,7 +8,7 @@ export default function ({
 }) {
     const cell = cells[`${x},${y}`];
     const {
-        character = '.',
+        character = ' ',
         foregroundColor = 'white',
         backgroundColor = 'black',
     } = cellData;

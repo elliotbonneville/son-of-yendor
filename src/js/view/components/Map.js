@@ -5,10 +5,10 @@ import tileData from '~/model/data/tiles';
 
 import { getLevel } from '~/model/features/level/selectors';
 
-export default store => new Component({
+export default () => new Component({
     x: 0,
-    y: 1,
-    onStateChange(newState) {
+    y: 2,
+    selectState(newState) {
         const level = getLevel(newState);
         
         if (newState.tiles) console.trace();

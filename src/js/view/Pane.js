@@ -7,13 +7,19 @@ export default class Pane {
         y = requiredProp('y'),
         width = requiredProp('width'),
         height = requiredProp('height'),
+
         children = [],
+        state = {},
+        selectState = () => {},
     }) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+
         this.children = children;
+        this.state = state;
+        this.selectState = selectState;
 
         this.cells = {};
     }
@@ -49,8 +55,15 @@ export default class Pane {
         return this.cells;
     }
 
+    setState(newState) {
+        const oldState = this.state;
+        this.state = Object.assign(oldState, newState);
+    }
+
     // Propagate state to children
     onStateChange = (newState) => {
+        this.selectState(newState);
         this.children.forEach(child => child.onStateChange(newState));
+        this.cells = this.render(this.state);
     }
 }

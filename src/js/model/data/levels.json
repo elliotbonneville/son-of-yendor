@@ -58,6 +58,12 @@
     ],
     "cavern": [
         {
+            "feature": "fill",
+            "properties": {
+                "type": "floor"
+            }
+        },
+        {
             "feature": "borders",
             "properties": {
                 "type": "wall"
