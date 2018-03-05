@@ -11,3 +11,5 @@ export default class Cell {
         this.backgroundColor = backgroundColor;
     }
 }
+
+export const emptyCell = new Cell({ character: ' ' });

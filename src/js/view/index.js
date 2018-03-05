@@ -27,7 +27,7 @@ export default ({
             // Panes
             Messages(),
             Stats(),
-            Menu(),
+            Menu(store),
 
             // Components
             Map(),

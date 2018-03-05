@@ -1,6 +1,8 @@
 import requiredProp from '~/utils/requiredProp';
 import rectangle from '~/utils/rectangle';
 
+import Cell from '~/view/Cell';
+
 export default class Component {
     constructor({
         x = requiredProp('x'),

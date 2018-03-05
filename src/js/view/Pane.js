@@ -1,6 +1,8 @@
 import requiredProp from '~/utils/requiredProp';
 import rectangle from '~/utils/rectangle';
 
+import { emptyCell } from '~/view/Cell';
+
 export default class Pane {
     constructor({
         x = requiredProp('x'),
@@ -26,7 +28,12 @@ export default class Pane {
     // blit output of data onto a renderer
     blit({ renderer = requiredProp('renderer') }) {
         this.bounds.forEach(({ x, y }) => {
-            renderer.drawCell({ x, y, cellData: this.cells[`${x},${y}`] });
+            renderer.drawCell({
+                x,
+                y,
+                cellData:
+                this.cells[`${x},${y}`] || emptyCell,
+            });
         });
     }
 

@@ -1,4 +1,4 @@
-export const GAME_WIDTH = 80;
+export const GAME_WIDTH = 90;
 export const GAME_HEIGHT = 24;
 export const MAP_WIDTH = 70;
 export const MAP_HEIGHT = 18;
