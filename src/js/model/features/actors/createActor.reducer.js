@@ -1,18 +1,19 @@
 import requiredProp from '~/utils/requiredProp';
 
-import actorDefinitions from '~/data/entities/actors/index';
+import actorDefinitions from '~/model/data/actors/definitions';
 
-function createActor({
+const createActor = ({
     actorType = requiredProp('actorType'),
+    id,
     position = requiredProp('position'),
-}) {
-    const data = actorDefinitions[actorType].data;
-    return { ...data, type: actorType, position };
-}
+}) => ({
+    ...actorDefinitions[actorType].data,
+    id,
+    position,
+    type: actorType,
+});
 
-export default function(state, { id, actorType, position }) {
-    return {
-        ...state,
-        [id]: createActor({ actorType, position }),
-    };
-};
+export default (state, { id, actorType, position }) => ({
+    ...state,
+    [id]: createActor({ actorType, id, position }),
+});

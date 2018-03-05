@@ -8,7 +8,8 @@ import Messages from '~/view/panes/Messages';
 import Menu from '~/view/panes/Menu';
 
 // Components
-import Map from '~/view/components/Map';
+import MapView from '~/view/components/data/MapView';
+import ActorsView from '~/view/components/data/ActorsView';
 import MapControls from '~/view/components/MapControls';
 
 import { GAME_WIDTH, GAME_HEIGHT } from '~/constants';
@@ -30,7 +31,8 @@ export default ({
             Menu(store),
 
             // Components
-            Map(),
+            MapView(),
+            ActorsView(),
             MapControls(store),
         ],
     });

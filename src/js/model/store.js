@@ -4,10 +4,12 @@ export default function store(reducer, initialState = {}) {
     
     const getState = () => state;
 
-    const dispatch = (action) => {
-        const previousState = state;
-        state = reducer(state, action);
-        listeners.forEach(listener => listener(state));
+    const dispatch = (...actions) => {
+        actions.forEach(action => {
+            const previousState = state;
+            state = reducer(state, action);
+            listeners.forEach(listener => listener(state));
+        });
     };
 
     const listen = (callback) => {

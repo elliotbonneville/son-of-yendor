@@ -1,13 +1,13 @@
 {
-    "player": {
+    "adventurer": {
         "data": {
             "corpse": "%",
             "health": 10,
             "speed": 100
         },
-        "metadata": {
+        "appearance": {
             "character": "@",
-            "foregroundColor": "red",
+            "foregroundColor": "white",
             "backgroundColor": "black"
         }
     }
