@@ -1,9 +1,9 @@
-import modeTypes from '~/controller/modes/modeTypes';
+import toolTypes from '~/controller/tools/toolTypes';
 
 const items = ['Sword', 'Bow'];
 
-export default {
+export const menu = {
     title: 'Items',
-    mode: modeTypes.ITEM,
+    mode: toolTypes.ITEM,
     children: items.map(title => ({ title })),
 }

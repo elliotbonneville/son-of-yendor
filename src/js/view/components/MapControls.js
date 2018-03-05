@@ -10,19 +10,19 @@ import {
     selectors as mouseSelectors,
 } from '~/model/features/ui/mouse/';
 
+import { selectors as modeSelectors } from '~/model/features/ui/mode';
+
 export default store => new Component({
     x: 0,
     y: 2,
     width: MAP_WIDTH,
     height: MAP_HEIGHT,
-    selectState: (state) => {
-        const newState = {
-            mouseDown: mouseSelectors.mouseDown(state),
-            mousePosition: mouseSelectors.mousePosition(state),
-            selectionBounds: rectangle(mouseSelectors.selectionBounds(state)),
-        };
-        return newState;
-    },
+    selectState: (state) => ({
+        mouseDown: mouseSelectors.mouseDown(state),
+        mousePosition: mouseSelectors.mousePosition(state),
+        selectionBounds: rectangle(mouseSelectors.selectionBounds(state)),
+        activeTool: modeSelectors.getActiveTool(state),
+    }),
     mouseListeners: {
         mousedown: [
             function({ location }) {
@@ -32,10 +32,18 @@ export default store => new Component({
                         mouseDownPosition: location
                     }),
                 );
-            }
+            },
         ],
         mouseup: [
             function ({ location }) {
+                const { activeTool } = this.state;
+                if (activeTool && activeTool.mouseListeners) {
+                    const { mouseup } = activeTool.mouseListeners;
+                    mouseup.forEach(
+                        listener => listener({ store, location }),
+                    );
+                }
+
                 store.dispatch(
                     mouseActions.setMouseDown({
                         mouseDown: false,

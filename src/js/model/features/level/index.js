@@ -1,12 +1,14 @@
 import { createReducer } from '~/model/utils';
 
-import createLevel from './createLevel.reducer';
+import createLevelReducer from './createLevel.reducer';
+import setTilesReducer from './setTiles.reducer';
 
-import { CREATE_LEVEL } from './types';
+import { CREATE_LEVEL, SET_TILES } from './types';
 
 export default createReducer(
     {},
     {
-        [CREATE_LEVEL]: createLevel,
+        [CREATE_LEVEL]: createLevelReducer,
+        [SET_TILES]: setTilesReducer,
     },
 );

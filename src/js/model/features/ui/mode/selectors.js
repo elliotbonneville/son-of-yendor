@@ -1,6 +1,7 @@
 import ui from '~/model/features/ui/selectors';
 
-import modeData from '~/controller/modes';
+import toolTypes from '~/controller/tools/toolTypes';
+import toolData from '~/controller/tools';
 
 export const getMode = state => ui(state).mode;
 
@@ -20,12 +21,11 @@ export const getActiveMenu = (state) => {
 
             return submenu ? submenu : menu;
         },
-        modeData,
+        toolData[toolTypes.OBSERVE].menu,
     );
 }
 
 export const getActiveMenuItem = (state) => {
-    console.log(getMode(state));
     return getMode(state).reduce(
         (menu, mode) => {
             const child = getMenuByMode({
@@ -38,3 +38,8 @@ export const getActiveMenuItem = (state) => {
         modeData,
     );
 }
+
+export const getActiveTool = (state) => {
+    const tool = [...getMode(state)].reverse()[0];
+    return toolData[tool];
+};
