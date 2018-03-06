@@ -1,0 +1,22 @@
+{
+    "gold": {
+        "data": {
+            "value": 100
+        },
+        "appearance": {
+            "character": "$",
+            "foregroundColor": "yellow",
+            "backgroundColor": "black"
+        }
+    },
+    "ruby": {
+        "data": {
+            "value": 1000
+        },
+        "appearance": {
+            "character": "*",
+            "foregroundColor": "red",
+            "backgroundColor": "black"
+        }
+    }
+}

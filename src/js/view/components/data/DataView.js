@@ -4,7 +4,7 @@ import Component from '~/view/Component';
 
 export default ({ selectStateData, renderData }) => new Component({
     x: 0,
-    y: 2,
+    y: 1,
     width: MAP_WIDTH,
     height: MAP_HEIGHT,
     selectState: newState => ({ data: selectStateData(newState) }),

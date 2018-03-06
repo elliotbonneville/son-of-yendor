@@ -14,7 +14,7 @@ import { selectors as modeSelectors } from '~/model/features/ui/mode';
 
 export default store => new Component({
     x: 0,
-    y: 2,
+    y: 1,
     width: MAP_WIDTH,
     height: MAP_HEIGHT,
     selectState: (state) => ({
