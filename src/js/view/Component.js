@@ -41,6 +41,10 @@ export default class Component {
         );
     }
 
+    setState(newState) {
+        this.state = Object.assign(this.state, newState);
+    }
+
     onStateChange(newState) {
         if (!this.selectState) return;
         const oldState = this.state;

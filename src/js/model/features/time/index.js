@@ -1,10 +1,17 @@
 import { createReducer } from '~/model/utils';
 
-import { TICK } from './types';
+import tick from '~/model/features/time/tick.reducer';
+import setPaused from '~/model/features/time/setPaused.reducer';
+
+import { SET_PAUSED, TICK } from './types';
 
 export default createReducer(
-    0,
     {
-        [TICK]: (state = 0) => state + 1,
+        tick: 0,
+        paused: true,
+    },
+    {
+        [TICK]: tick,
+        [SET_PAUSED]: setPaused,
     },
 );
