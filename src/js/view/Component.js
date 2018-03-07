@@ -49,7 +49,7 @@ export default class Component {
         if (!this.selectState) return;
         const oldState = this.state;
         const newSelectedState = this.selectState(newState);
-        if (oldState === newSelectedState) return;
+        // if (oldState === newSelectedState) return;
         this.state = newSelectedState;
     }
 }

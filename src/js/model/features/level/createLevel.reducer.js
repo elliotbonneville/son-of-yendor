@@ -40,7 +40,8 @@ function createLevel({ seed, levelType }) {
     });
 }
 
-export default (state, { id, seed, levelType }) => ({
+export default (state = {}, { id, seed, levelType }) => ({
+    ...state,
     seed,
     tiles: createLevel({ seed, levelType }),
 });

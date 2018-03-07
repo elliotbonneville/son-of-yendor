@@ -1,4 +1,8 @@
+import tileDefinitions from '~/model/data/tiles';
+
 import createLevelFeature from './createLevelFeature';
+
+const createTile = tile => ({ ...tileDefinitions[tile] });
 
 const levelFeatures = {
     fill: createLevelFeature(
@@ -10,7 +14,7 @@ const levelFeatures = {
         }) => bounds.reduce(
             (tiles = {}, { x, y }) => Object.assign(
                 tiles,
-                { [`${x},${y}`]: type }
+                { [`${x},${y}`]: createTile(type) },
             ),
         ),
     ),
@@ -27,7 +31,7 @@ const levelFeatures = {
             (tiles = level, { x, y }) => Object.assign( 
                 tiles,
                 (rng() < noiseLevel)
-                    ? { [`${x},${y}`]: type }
+                    ? { [`${x},${y}`]: createTile(type) }
                     : {},
             ),
         ),
@@ -48,7 +52,7 @@ const levelFeatures = {
                     x === bounds.right - 1||
                     y === bounds.bottom - 1
                 )
-                    ? { [`${x},${y}`]: type }
+                    ? { [`${x},${y}`]: createTile(type) }
                     : {},
             ),
         ),

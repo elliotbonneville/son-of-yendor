@@ -1,7 +1,3 @@
-import { MAP_WIDTH, MAP_HEIGHT } from '~/constants';
-
-import { randomRange } from '~/utils/math2';
-
 // model
 import { rootReducer } from '~/model';
 import createStore from '~/model/store';
@@ -10,6 +6,9 @@ import createWorld from '~/model/world';
 import createLevel from '~/model/features/level/createLevel.action';
 import createActor from '~/model/features/actors/createActor.action';
 import tick from '~/model/features/time/tick.action';
+
+import { getTileNeighbors } from '~/model/features/level/selectors';
+import dijkstraMap from '~/model/features/level/dijkstraMap.selector';
 
 // view
 import { createRenderer } from '~/view/renderer';
@@ -35,20 +34,12 @@ function init() {
             seed: Date.now(),
             levelType: 'cavern',
         }),
+        createActor({
+            id: 0,
+            actorType: 'adventurer',
+            position: { x: 5, y: 5 },
+        }),
     );
-
-	for (let id = 0; id < 20; id++) {
-		store.dispatch(
-			createActor({
-				id,
-				actorType: 'adventurer',
-				position: {
-					x: randomRange(1, MAP_WIDTH - 2),
-					y: randomRange(1, MAP_HEIGHT - 2),
-				},
-			}),
-		);
-	}
 
     // start clock
     setInterval(() => store.dispatch(tick()), 500);
@@ -58,6 +49,6 @@ function destroy() {
     renderer.destroy();
 }
 
-window.game = { destroy, init, renderer, store, view };
+window.game = { destroy, init, renderer, store, view, dijkstraMap, getTileNeighbors };
 
 init();

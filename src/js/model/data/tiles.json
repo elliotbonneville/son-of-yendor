@@ -1,6 +1,8 @@
 {
     "wall": {
-        "walkable": false,
+        "data": {
+            "walkable": false
+        },
         "appearance": {
             "foregroundColor": "white",
             "backgroundColor": "black",
@@ -8,7 +10,9 @@
         }
     },
     "floor": {
-        "walkable": true,
+        "data": {
+            "walkable": true
+        },
         "appearance": {
             "foregroundColor": "white",
             "backgroundColor": "black",
@@ -16,7 +20,9 @@
         }
     },
     "deep water": {
-        "walkable": false,
+        "data": {
+            "walkable": false
+        },
         "appearance": {
             "foregroundColor": "darkblue",
             "backgroundColor": "black",
@@ -24,7 +30,9 @@
         }
     },
     "shallow water": {
-        "walkable": true,
+        "data": {
+            "walkable": true
+        },
         "appearance": {
             "foregroundColor": "blue",
             "backgroundColor": "black",
@@ -32,7 +40,9 @@
         }
     },
     "grass": {
-        "walkable": true,
+        "data": {
+            "walkable": true
+        },
         "appearance": {
             "foregroundColor": "green",
             "backgroundColor": "black",

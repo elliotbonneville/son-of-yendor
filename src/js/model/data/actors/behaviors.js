@@ -1,4 +1,4 @@
-import { getRandomNeighbor } from '~/model/features/level/selectors';
+import greedy from './ai/greedy';
 
 import move from '~/model/features/actors/move.action';
 
@@ -6,13 +6,7 @@ const adventurer = ({ actor, state }) => {
     return [
         move({
             id: actor.id,
-            position: getRandomNeighbor(
-                state,
-                {
-                    position: actor.position,
-                    criteria: tile => tile.walkable,
-                },
-            )
+            position: greedy({ state, start: actor.position }),
         }),
     ];
 }

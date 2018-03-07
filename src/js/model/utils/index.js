@@ -22,8 +22,38 @@ export function combineReducers(reducers) {
         reducerKeys.reduce(
             (reducer, reducerKey) => ({
                 ...reducer,
-                [reducerKey]: combinedReducers[reducerKey](state[reducerKey], action),
+                [reducerKey]: combinedReducers[reducerKey](
+                    state[reducerKey],
+                    action,
+                ),
             }),
             {},
         );
+}
+
+export function createSelector(selectors, selector) {
+    let computedValue;
+    let selectedValues = [];
+    let state;
+
+    return (newState) => {
+        // If state hasn't changed, don't bother checking selectors just return
+        // previous value right away as it won't have changed
+        if (state === newState && computedValue) return computedValue;
+
+        // Get selected values from new state
+        const newSelectedValues = selectors.map(selector => selector(newState));
+        const valuesUnchanged = newSelectedValues.every(
+            (value, i) => value === selectedValues[i],
+        );
+
+        // If state has changed but the values from which the computed value is
+        // derived haven't, return the computed value as it won't have changed
+        if (valuesUnchanged) return computedValue;
+
+        // If we reach this point we have to compute the value again
+        selectedValues = newSelectedValues;
+        computedValue = selector(...selectedValues);
+        return computedValue;
+    };
 }
