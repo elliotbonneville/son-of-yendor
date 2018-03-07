@@ -11,6 +11,7 @@ import Time from '~/view/panes/Time';
 // Components
 import MapView from '~/view/components/data/MapView';
 import ItemsView from '~/view/components/data/ItemsView';
+import TrapsView from '~/view/components/data/TrapsView';
 import DijkstraMapView from '~/view/components/data/DijkstraMapView';
 import ActorsView from '~/view/components/data/ActorsView';
 import MapControls from '~/view/components/MapControls';
@@ -36,6 +37,7 @@ export default ({
 
             // Components
             MapView(),
+            TrapsView(),
             ItemsView(),
             DijkstraMapView(),
             ActorsView(),

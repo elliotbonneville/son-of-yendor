@@ -1,0 +1,12 @@
+{
+    "pit": {
+        "data": {
+            "behavior": "pit"
+        },
+        "appearance": {
+            "foregroundColor": "brown",
+            "backgroundColor": "black",
+            "character": "^"
+        }
+    }
+}

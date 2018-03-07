@@ -4,9 +4,14 @@ import actorTick from '~/model/features/actors/tick';
 import { getActors } from '~/model/features/actors/selectors';
 import { getTick } from '~/model/features/time/selectors';
 
+import * as trapListeners from '~/model/features/traps/listeners';
+
 function tick({ state, dispatch }) {
-    Object.entries(getActors(state)).forEach(
-        ([,actor]) => actorTick({ actor, state, dispatch }),
+    Object.values(trapListeners).forEach(
+        listener => listener({ state, dispatch }),
+    );
+    Object.values(getActors(state)).forEach(
+        (actor) => actorTick({ actor, state, dispatch }),
     );
 }
 
