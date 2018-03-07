@@ -11,6 +11,7 @@ const createItem = ({
         position,
         id,
         type: itemType,
+        ...itemDefinitions[itemType],
     };
 };
 

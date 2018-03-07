@@ -23,7 +23,7 @@ export default function ({
         });
     }
 
-    if (character && cell.innerHTML !== character) {
+    if (typeof character !== 'undefined' && cell.innerHTML !== character) {
         cell.innerHTML = character;
     }
 }

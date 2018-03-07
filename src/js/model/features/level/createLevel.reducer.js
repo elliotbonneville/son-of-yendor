@@ -8,11 +8,13 @@ import { MAP_WIDTH, MAP_HEIGHT } from '~/constants';
 import featureDefinitions from './featureDefinitions';
 import levelDefinitions from '~/model/data/levels';
 
+const storeNeighbors = featureDefinitions.storeNeighbors();
+
 function createLevelFactory(...features) {
     return ({
         rng = requiredProp('rng'),
         bounds = requiredProp('bounds'),
-    }) => features.reduce(
+    }) => [...features, storeNeighbors].reduce(
         (level = {}, feature) => feature({ rng, bounds, level }),
         {},
     );

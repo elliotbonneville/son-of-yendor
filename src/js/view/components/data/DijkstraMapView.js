@@ -18,8 +18,10 @@ const valueColors = [
 ];
 
 export default () => DataView({
-    selectStateData: state => dijkstraMap({ state, name: 'items' }),
-    renderData: values => (!game.debug) ? {} : Object.entries(values).reduce(
+    selectStateData: state => (game.debug)
+        ? dijkstraMap({ state, name: 'items' })
+        : {},
+    renderData: values => Object.entries(values).reduce(
         (cells, [coordinates, value]) => {
             if (value === Infinity) return cells;
             const shortValue = (value > 9) ? 9 : value;

@@ -1,10 +1,59 @@
+import cellKey from '~/utils/cellKey';
+
 import tileDefinitions from '~/model/data/tiles';
 
 import createLevelFeature from './createLevelFeature';
 
 const createTile = tile => ({ ...tileDefinitions[tile] });
 
+const findNeighbors = (tiles, coordinates) => {
+    const [x, y] = coordinates.split(',').map(Number);
+    const offsets = [
+        [-1, -1],
+        [0, -1],
+        [1, -1],
+        [-1, 0],
+        [1, 0],
+        [-1, 1],
+        [0, 1],
+        [1, 1],
+    ];
+    return offsets.reduce(
+        (neighbors, [dx, dy]) => {
+            const neighborCoords = cellKey({
+                x: x + dx,
+                y: y + dy,
+            });
+
+            const neighbor = tiles[neighborCoords];
+            return (neighbor)
+                ? Object.assign(
+                    neighbors,
+                    { [neighborCoords]: neighbor },
+                )
+                : neighbors;
+        },
+        {},
+    );
+};
+
 const levelFeatures = {
+    storeNeighbors: createLevelFeature(
+        ({
+            level = requiredProp('level')
+        }) => Object.entries(level).reduce(
+            (tilesWithNeighbors, [coords, tile]) => Object.assign(
+                tilesWithNeighbors,
+                {
+                    [coords]: Object.assign(
+                        tile, { neighbors: findNeighbors(level, coords) }
+                    ),
+                },
+            ),
+            {},
+        ),
+    ),
+            
     fill: createLevelFeature(
         ({
             bounds = requiredProp('bounds'),

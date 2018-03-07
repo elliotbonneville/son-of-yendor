@@ -6,12 +6,8 @@ import cellKey from '~/utils/cellKey';
 
 import { createSelector } from '~/model/utils';
 
-import {
-    getTile,
-    getTiles,
-    getTileNeighbors,
-} from '~/model/features/level/selectors';
-import { getItemsWithValues } from '~/model/features/items/selectors';
+import { getTiles } from '~/model/features/level/selectors';
+import { getItems } from '~/model/features/items/selectors';
 
 const unassignedDistanceMap = rectangle({
     width: MAP_WIDTH,
@@ -22,31 +18,33 @@ const unassignedDistanceMap = rectangle({
 );
 
 const generateMap = ({
-    state = requiredProp('state'),
     pointsOfInterest = requiredProp('pointsOfInterest'),
-    maxInterest = requiredProp('maxInterest'),
     tiles = requiredProp('tiles'),
+
+    interestLevel = 0,
 }) => {
     const startTime = Date.now();
     const combinedDistances = Object.assign({}, unassignedDistanceMap);
-    const graphs = pointsOfInterest.map((point) => {
-        const frontier = [point.position];
-        const distance = { [point.position]: 0 };
+    const graphs = pointsOfInterest.map(({ position }) => {
+        combinedDistances[position] = interestLevel;
+        const frontier = [position];
+        const distance = { [position]: interestLevel };
         let current;
-        let neighbors;    
+        let neighbors;
+
         while (frontier.length) {
             current = frontier.shift();
-            neighbors = getTileNeighbors(state, current);
-            Object.keys(neighbors).forEach((position) => {
-                if (typeof distance[position] === 'undefined') {
-                    frontier.push(position);
-                    distance[position] = distance[current] + 1;
-                    combinedDistances[position] = tiles[position].data.walkable
-                        ? Math.min(
-                            combinedDistances[position],
-                            distance[position],
-                        )
-                        : Infinity;
+            Object.keys(tiles[current].neighbors).forEach((neighbor) => {
+                if (typeof distance[neighbor] === 'undefined') {
+                    frontier.push(neighbor);
+                    distance[neighbor] = distance[current] + 1;
+                    combinedDistances[neighbor] =
+                        (tiles[neighbor].data.walkable)
+                            ? Math.min(
+                                combinedDistances[neighbor],
+                                distance[neighbor],
+                            )
+                            : Infinity;
                 }
             });
         }
@@ -65,16 +63,15 @@ const generateMap = ({
 
 const mapGenerators = {
     items: createSelector(
-        [state => state, getTiles, getItemsWithValues],
-        (state, tiles, itemsWithValues) => generateMap({
-            pointsOfInterest: itemsWithValues.map(
-                ({ position, value }) => ({
+        [getTiles, getItems],
+        (tiles, items) => generateMap({
+            pointsOfInterest: Object.values(items).map(
+                ({ position, data }) => ({
                     position: cellKey(position),
-                    weight: value
+                    weight: data.value
                 }),
             ),
             maxInterest: 10,
-            state,
             tiles,
         }),
     ),
