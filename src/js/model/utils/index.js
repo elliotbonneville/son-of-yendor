@@ -47,13 +47,6 @@ export function createSelector(selectors, selector) {
             (value, i) => value === selectedValues[i],
         );
 
-        console.log(
-            newSelectedValues,
-            newSelectedValues.map(
-                (values, i) => newSelectedValues[i] === selectedValues[i],
-            ),
-        );
-
         // If state has changed but the values from which the computed value is
         // derived haven't, return the computed value as it won't have changed
         if (valuesUnchanged) return computedValue;

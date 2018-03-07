@@ -1,7 +1,7 @@
 {
     "gold": {
         "data": {
-            "value": 100
+            "value": 5
         },
         "appearance": {
             "character": "$",
@@ -11,7 +11,7 @@
     },
     "ruby": {
         "data": {
-            "value": 1000
+            "value": 9
         },
         "appearance": {
             "character": "*",

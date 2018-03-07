@@ -1,16 +1,20 @@
-import cellKey from '~/utils/cellKey';
+import sample from 'lodash/sample';
 
 import getDijkstraMap from '~/model/features/level/dijkstraMap.selector';
-import { getTileNeighbors } from '~/model/features/level/selectors';
+import { getTile } from '~/model/features/level/selectors';
 
 export default ({ start, state }) => {
-    const dijkstraMap = getDijkstraMap({ state, name: 'items' });
-    const neighbors = getTileNeighbors(state, cellKey(start));
+    const distances = getDijkstraMap({ state, name: 'items' });
+    const neighbors = getTile(state, start).neighbors;
     const fastestRouteToWealth = Object.keys(neighbors).sort(
         (positionA, positionB) => {
-            return dijkstraMap[positionA] - dijkstraMap[positionB];
+            return distances[positionA] - distances[positionB];
         },
     );
-    const [x, y] = fastestRouteToWealth[0].split(',');
+    const cheapestStep = fastestRouteToWealth[0];
+    const possibleSteps = fastestRouteToWealth.filter(
+        step => distances[step] === distances[cheapestStep],
+    );
+    const [x, y] = sample(possibleSteps).split(',');
     return { x, y };
 };

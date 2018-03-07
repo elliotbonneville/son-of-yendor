@@ -36,10 +36,11 @@ const generateMap = ({
             current = frontier.shift();
             Object.keys(tiles[current].neighbors).forEach((neighbor) => {
                 if (typeof distance[neighbor] === 'undefined') {
-                    frontier.push(neighbor);
+                    const { walkable } = tiles[neighbor].data;
+                    if (walkable) frontier.push(neighbor);
                     distance[neighbor] = distance[current] + 1;
                     combinedDistances[neighbor] =
-                        (tiles[neighbor].data.walkable)
+                        (walkable)
                             ? Math.min(
                                 combinedDistances[neighbor],
                                 distance[neighbor],
@@ -68,7 +69,7 @@ const mapGenerators = {
             pointsOfInterest: Object.values(items).map(
                 ({ position, data }) => ({
                     position: cellKey(position),
-                    weight: data.value
+                    interestLevel: -data.value
                 }),
             ),
             maxInterest: 10,

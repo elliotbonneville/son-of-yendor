@@ -4,7 +4,7 @@ import tileDefinitions from '~/model/data/tiles';
 
 import createLevelFeature from './createLevelFeature';
 
-const createTile = tile => ({ ...tileDefinitions[tile] });
+import createTile from '~/model/features/level/createTile';
 
 const findNeighbors = (tiles, coordinates) => {
     const [x, y] = coordinates.split(',').map(Number);
@@ -63,7 +63,7 @@ const levelFeatures = {
         }) => bounds.reduce(
             (tiles = {}, { x, y }) => Object.assign(
                 tiles,
-                { [`${x},${y}`]: createTile(type) },
+                { [`${x},${y}`]: createTile({ type }) },
             ),
         ),
     ),
@@ -80,7 +80,7 @@ const levelFeatures = {
             (tiles = level, { x, y }) => Object.assign( 
                 tiles,
                 (rng() < noiseLevel)
-                    ? { [`${x},${y}`]: createTile(type) }
+                    ? { [`${x},${y}`]: createTile({ type }) }
                     : {},
             ),
         ),
@@ -101,7 +101,7 @@ const levelFeatures = {
                     x === bounds.right - 1||
                     y === bounds.bottom - 1
                 )
-                    ? { [`${x},${y}`]: createTile(type) }
+                    ? { [`${x},${y}`]: createTile({ type }) }
                     : {},
             ),
         ),
