@@ -5,6 +5,7 @@ import toolTypes from '~/controller/tools/toolTypes';
 
 import createTile from '~/model/features/level/createTile';
 import setTiles from '~/model/features/level/setTiles.action';
+import log from '~/model/features/ui/messages/log.action';
 import { getTile } from '~/model/features/level/selectors';
 
 import { selectors as mouseSelectors } from '~/model/features/ui/mouse';
@@ -28,7 +29,9 @@ export const mouseListeners = {
             const selectionBounds = rectangle(
                 mouseSelectors.selectionBounds(state),
             );
-            const type = modeSelectors.getMode(state)[0];
+            const mode = modeSelectors.getMode(state);
+            if (mode.length !== 2) return;
+            const type = mode[0];
             const newTiles = selectionBounds.reduce(
                 (cells, coords) => {
                     const key = cellKey(coords);
@@ -44,6 +47,7 @@ export const mouseListeners = {
                 },
                 {},
             );
+            store.dispatch(log(`You place some ${type}.`));
             store.dispatch(setTiles(newTiles));
         },
     ],

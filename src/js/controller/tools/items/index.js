@@ -7,6 +7,8 @@ import toolTypes from '~/controller/tools/toolTypes';
 import { selectors as mouseSelectors } from '~/model/features/ui/mouse';
 import { selectors as modeSelectors } from '~/model/features/ui/mode';
 
+import log from '~/model/features/ui/messages/log.action';
+
 import createItems from '~/model/features/items/createItems.action';
 
 import itemDefinitions from '~/model/data/items/definitions';
@@ -27,7 +29,9 @@ export const mouseListeners = {
             const selectionBounds = rectangle(
                 mouseSelectors.selectionBounds(state),
             );
-            const itemType = modeSelectors.getMode(state)[0];
+            const mode = modeSelectors.getMode(state);
+            if (mode.length !== 2) return;
+            const itemType = mode[0];
 
             const items = selectionBounds.reduce(
                 (actions, position) => [
@@ -36,6 +40,9 @@ export const mouseListeners = {
                 ],
                 [],
             );
+            const { metadata } = itemDefinitions[itemType];
+            const name = items.length > 1 ? metadata.plural : metadata.singular;
+            store.dispatch(log(`You place ${items.length} ${name}.`));
             store.dispatch(createItems(items));
         },
     ],

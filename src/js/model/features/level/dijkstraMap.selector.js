@@ -7,7 +7,7 @@ import cellKey from '~/utils/cellKey';
 import { createSelector } from '~/model/utils';
 
 import { getTiles } from '~/model/features/level/selectors';
-import { getItems } from '~/model/features/items/selectors';
+import { getItemsOnFloor } from '~/model/features/items/selectors';
 
 const unassignedDistanceMap = rectangle({
     width: MAP_WIDTH,
@@ -64,7 +64,7 @@ const generateMap = ({
 
 const mapGenerators = {
     items: createSelector(
-        [getTiles, getItems],
+        [getTiles, getItemsOnFloor],
         (tiles, items) => generateMap({
             pointsOfInterest: Object.values(items).map(
                 ({ position, data }) => ({

@@ -42,7 +42,10 @@ export default store => new Pane({
                 visible: modeSelectors.getMode(state).length,
                 mouseListeners: {
                     mousedown: [
-                        () => store.dispatch(modeActions.popMode()),
+                        () => {
+                            store.dispatch(modeActions.popMode());
+                            store.dispatch(modeActions.popMode());
+                        },
                     ],
                 },
             }),

@@ -3,6 +3,10 @@
         "data": {
             "value": 5
         },
+        "metadata": {
+            "singular": "pile of gold",
+            "plural": "piles of gold"
+        },
         "appearance": {
             "character": "$",
             "foregroundColor": "yellow",
@@ -12,6 +16,10 @@
     "ruby": {
         "data": {
             "value": 9
+        },
+        "metadata": {
+            "singular": "ruby",
+            "plural": "rubies"
         },
         "appearance": {
             "character": "*",

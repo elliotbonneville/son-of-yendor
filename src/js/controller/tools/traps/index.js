@@ -7,6 +7,8 @@ import toolTypes from '~/controller/tools/toolTypes';
 import { selectors as mouseSelectors } from '~/model/features/ui/mouse';
 import { selectors as modeSelectors } from '~/model/features/ui/mode';
 
+import log from '~/model/features/ui/messages/log.action';
+
 import createTraps from '~/model/features/traps/createTraps.action';
 import trapDefinitions from '~/model/data/traps/definitions';
 
@@ -26,7 +28,9 @@ export const mouseListeners = {
             const selectionBounds = rectangle(
                 mouseSelectors.selectionBounds(state),
             );
-            const trapType = modeSelectors.getMode(state)[0];
+            const mode = modeSelectors.getMode(state);
+            if (mode.length !== 2) return;
+            const trapType = mode[0];
 
             const traps = selectionBounds.reduce(
                 (actions, position) => [
@@ -34,6 +38,16 @@ export const mouseListeners = {
                     { id: generateId(), position, trapType },
                 ],
                 [],
+            );
+
+            const placedMultiple = traps.length > 1;
+
+            store.dispatch(
+                log(
+                    placedMultiple
+                        ? `You place ${traps.length} ${trapType} traps.`
+                        : `You place a ${trapType} trap.`,
+                ),
             );
             store.dispatch(createTraps(traps));
         },

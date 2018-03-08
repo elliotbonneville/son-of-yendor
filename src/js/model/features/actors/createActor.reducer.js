@@ -12,6 +12,7 @@ const createActor = ({
     position,
     type: actorType,
     dead: false,
+    inventory: [],
 });
 
 export default (state, { id, actorType, position }) => ({
