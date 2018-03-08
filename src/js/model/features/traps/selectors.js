@@ -5,7 +5,3 @@ export function getTraps(state) {
 export function getTrap(state, { id }) {
     return getTraps(state)[id];
 }
-
-export function getNextTrapId(state) { 
-    return Object.keys(getTraps(state)).length;
-}

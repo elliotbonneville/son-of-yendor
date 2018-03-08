@@ -12,18 +12,17 @@ const getTrapsAndActors = createSelector(
     (actors, traps) => ({ actors, traps }),
 );
 
-export const traps = ({
-    state = requiredProp('state'),
-    dispatch = requiredProp('dispatch'),
+export default ({
+    store = requiredProp('store'),
 }) => {
-    const { actors, traps } = getTrapsAndActors(state);
+    const { actors, traps } = getTrapsAndActors(store.getState());
 
     Object.values(actors).forEach((actor) => {
         Object.values(traps).forEach((trap) => {
             const { x: actorX, y: actorY } = actor.position;
             const { x: trapX, y: trapY } = trap.position;
             if (actorX == trapX && actorY == trapY) {
-                trapBehaviors[trap.type]({ actor, dispatch });
+                trapBehaviors[trap.type]({ actor, store });
             }
         });
     });

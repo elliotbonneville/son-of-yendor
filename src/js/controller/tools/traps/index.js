@@ -1,3 +1,5 @@
+import { generate as generateId } from 'shortid';
+
 import rectangle from '~/utils/rectangle';
 
 import toolTypes from '~/controller/tools/toolTypes';
@@ -6,8 +8,6 @@ import { selectors as mouseSelectors } from '~/model/features/ui/mouse';
 import { selectors as modeSelectors } from '~/model/features/ui/mode';
 
 import createTraps from '~/model/features/traps/createTraps.action';
-import { getNextTrapId } from '~/model/features/traps/selectors';
-
 import trapDefinitions from '~/model/data/traps/definitions';
 
 export const menu = {
@@ -28,11 +28,10 @@ export const mouseListeners = {
             );
             const trapType = modeSelectors.getMode(state)[0];
 
-            let id = getNextTrapId(state);
             const traps = selectionBounds.reduce(
                 (actions, position) => [
                     ...actions,
-                    { id: id++, position, trapType },
+                    { id: generateId(), position, trapType },
                 ],
                 [],
             );

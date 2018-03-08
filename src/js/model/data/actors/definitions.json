@@ -1,12 +1,12 @@
 {
     "adventurer": {
         "data": {
-            "corpse": "%",
             "health": 10,
             "speed": 100
         },
         "appearance": {
-            "character": "@",
+            "body": "@",
+            "corpse": "%",
             "foregroundColor": "white",
             "backgroundColor": "black"
         }

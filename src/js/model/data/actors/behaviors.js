@@ -2,11 +2,14 @@ import greedy from './ai/greedy';
 
 import move from '~/model/features/actors/move.action';
 
-const adventurer = ({ actor, state }) => {
+const adventurer = ({ actor, store }) => {
     return [
         move({
             id: actor.id,
-            position: greedy({ state, start: actor.position }),
+            position: greedy({
+                state: store.getState(),
+                start: actor.position,
+            }),
         }),
     ];
 }

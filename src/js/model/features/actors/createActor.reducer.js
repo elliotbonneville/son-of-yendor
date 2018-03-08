@@ -11,6 +11,7 @@ const createActor = ({
     id,
     position,
     type: actorType,
+    dead: false,
 });
 
 export default (state, { id, actorType, position }) => ({

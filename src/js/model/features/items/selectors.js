@@ -5,7 +5,3 @@ export function getItems(state) {
 export function getItem(state, { id }) {
     return getItems(state)[id];
 }
-
-export function getNextItemId(state) { 
-    return Object.keys(getItems(state)).length;
-}

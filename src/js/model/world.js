@@ -1,17 +1,16 @@
 import requiredProp from '~/utils/requiredProp';
 
-import actorTick from '~/model/features/actors/tick';
 import { getActors } from '~/model/features/actors/selectors';
 import { getTick } from '~/model/features/time/selectors';
 
-import * as trapListeners from '~/model/features/traps/listeners';
+import trapListeners from '~/model/features/traps/listeners';
+import actorListeners from '~/model/features/actors/listeners';
 
-function tick({ state, dispatch }) {
-    Object.values(trapListeners).forEach(
-        listener => listener({ state, dispatch }),
-    );
-    Object.values(getActors(state)).forEach(
-        (actor) => actorTick({ actor, state, dispatch }),
+const featureListeners = [actorListeners, trapListeners];
+
+function tick({ store }) {
+    featureListeners.forEach(
+        featureListener => featureListener({ store }),
     );
 }
 
@@ -22,14 +21,11 @@ export default ({
 
     return {
         init: () => {
-            store.listen((newState) => {
-                const nextTick = getTick(newState);
+            store.listen(() => {
+                const nextTick = getTick(store.getState());
                 if (currentTick !== nextTick) {
                     currentTick = nextTick;
-                    tick({
-                        state: newState,
-                        dispatch: store.dispatch,
-                    });
+                    tick({ store });
                 }
             });
         },
