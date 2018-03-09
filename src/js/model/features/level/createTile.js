@@ -9,4 +9,5 @@ export default ({
     {},
     tile,
     tileDefinitions[type],
+    { type }
 );

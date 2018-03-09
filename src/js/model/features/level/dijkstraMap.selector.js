@@ -8,6 +8,7 @@ import { createSelector } from '~/model/utils';
 
 import { getTiles } from '~/model/features/level/selectors';
 import { getItemsOnFloor } from '~/model/features/items/selectors';
+import { getTilesOfType } from '~/model/features/level/selectors';
 
 const unassignedDistanceMap = rectangle({
     width: MAP_WIDTH,
@@ -23,6 +24,7 @@ const generateMap = ({
 
     interestLevel = 0,
 }) => {
+    console.log(pointsOfInterest, tiles);
     const startTime = Date.now();
     const combinedDistances = Object.assign({}, unassignedDistanceMap);
     const graphs = pointsOfInterest.map(({ position }) => {
@@ -73,6 +75,15 @@ const mapGenerators = {
                 }),
             ),
             maxInterest: 10,
+            tiles,
+        }),
+    ),
+    stairs: createSelector(
+        [getTiles, (state) => getTilesOfType(state, { type: 'stairs' })],
+        (tiles, stairs) => generateMap({
+            pointsOfInterest: Object.entries(stairs).map(
+                ([position]) => ({ position })
+            ),
             tiles,
         }),
     ),

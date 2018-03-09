@@ -5,8 +5,11 @@ import toolTypes from '~/controller/tools/toolTypes';
 
 import createTile from '~/model/features/level/createTile';
 import setTiles from '~/model/features/level/setTiles.action';
+import modifyMana from '~/model/features/stats/modifyMana.action';
+
 import log from '~/model/features/ui/messages/log.action';
 import { getTile } from '~/model/features/level/selectors';
+import { getMana } from '~/model/features/stats/selectors';
 
 import { selectors as mouseSelectors } from '~/model/features/ui/mouse';
 import { selectors as modeSelectors } from '~/model/features/ui/mode';
@@ -49,8 +52,24 @@ export const mouseListeners = {
                 },
                 {},
             );
-            store.dispatch(log(`You place some ${type}.`));
-            store.dispatch(setTiles(newTiles));
+
+            const totalCost = Object.values(newTiles).reduce(
+                (acc, { data }) => acc + data.cost,
+                0,
+            );
+            const remainingMana = getMana(state);
+
+            if (totalCost < remainingMana) {
+                store.dispatch(setTiles(newTiles));
+                store.dispatch(modifyMana(-totalCost));
+                store.dispatch(
+                    log(`You materialize some ${type}. You feel weaker... [-${totalCost} power]`),
+                );
+            } else {
+                store.dispatch(
+                    log(`You try to materialize some ${type}, but don't have the power...`),
+                );
+            }
         },
     ],
 };

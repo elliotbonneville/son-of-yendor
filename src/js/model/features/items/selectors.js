@@ -30,3 +30,14 @@ export function getItemsByPosition(
         item => positionsEqual(position, item.position)
     );
 }
+
+export function getTotalValue(items) {
+    return items.length
+        ? items.reduce((totalValue, item) => totalValue + item.data.value, 0)
+        : 0;
+}
+
+export const getValueOfItemsOnFloor = createSelector(
+    [getItemsOnFloor],
+    (itemsOnFloor) => getTotalValue(Object.values(itemsOnFloor)),
+);

@@ -1,7 +1,8 @@
 {
     "pit": {
         "data": {
-            "behavior": "pit"
+            "behavior": "pit",
+            "value": 10
         },
         "appearance": {
             "foregroundColor": "brown",

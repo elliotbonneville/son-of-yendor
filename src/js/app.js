@@ -40,7 +40,7 @@ function init() {
         }),
     );
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 0; i++) {
 		store.dispatch(
 			createActor({
                 id: generateId(),

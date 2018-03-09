@@ -3,8 +3,8 @@ import sample from 'lodash/sample';
 import getDijkstraMap from '~/model/features/level/dijkstraMap.selector';
 import { getTile } from '~/model/features/level/selectors';
 
-export default ({ start, state }) => {
-    const distances = getDijkstraMap({ state, name: 'items' });
+export default ({ start, state, goal }) => {
+    const distances = getDijkstraMap({ state, name: goal });
     const neighbors = getTile(state, start).neighbors;
     const fastestRouteToWealth = Object.keys(neighbors).sort(
         (positionA, positionB) => {

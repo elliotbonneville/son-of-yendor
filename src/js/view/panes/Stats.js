@@ -4,6 +4,9 @@ import Pane from '~/view/Pane';
 import Component from '~/view/Component';
 import label from '~/view/label';
 
+import { getValueOfItemsOnFloor } from '~/model/features/items/selectors';
+import { getMana } from '~/model/features/stats/selectors';
+
 export default () => new Pane({
     x: 0,
     y: 0,
@@ -14,30 +17,30 @@ export default () => new Pane({
         new Component({
             x: 0,
             y: 0,
-            width: 12,
+            width: 15,
             height: 1,
-            selectState(newState) {
-                return { gems: 5000 };
-            },
+            selectState: (newState) => ({
+                treasure: getValueOfItemsOnFloor(newState),
+            }),
             render() {
                 return label({
-                    text: `Gems: ${this.state.gems}`,
+                    text: `Treasure: ${this.state.treasure}`,
                 });
             }
         }),
 
         // Render amount of mana
         new Component({
-            x: 14,
+            x: 17,
             y: 0,
-            width: 7,
+            width: 14,
             height: 1,
             selectState(newState) {
-                return { mana: 100 };
+                return { mana: getMana(newState) };
             },
             render() {
                 return label({
-                    text: `Mana: ${this.state.mana}`,
+                    text: `Power: ${this.state.mana}`,
                 });
             }
         }),

@@ -5,8 +5,9 @@ import { getTick } from '~/model/features/time/selectors';
 
 import trapListeners from '~/model/features/traps/listeners';
 import actorListeners from '~/model/features/actors/listeners';
+import itemListeners from '~/model/features/items/listeners';
 
-const featureListeners = [actorListeners, trapListeners];
+const featureListeners = [actorListeners, itemListeners, trapListeners];
 
 function tick({ store }) {
     featureListeners.forEach(

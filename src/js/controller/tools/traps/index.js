@@ -6,10 +6,13 @@ import toolTypes from '~/controller/tools/toolTypes';
 
 import { selectors as mouseSelectors } from '~/model/features/ui/mouse';
 import { selectors as modeSelectors } from '~/model/features/ui/mode';
+import { getMana } from '~/model/features/stats/selectors';
 
 import log from '~/model/features/ui/messages/log.action';
 
 import createTraps from '~/model/features/traps/createTraps.action';
+import modifyMana from '~/model/features/stats/modifyMana.action';
+
 import trapDefinitions from '~/model/data/traps/definitions';
 
 const children = Object.keys(trapDefinitions).map(name => ({
@@ -43,15 +46,35 @@ export const mouseListeners = {
             );
 
             const placedMultiple = traps.length > 1;
-
-            store.dispatch(
-                log(
-                    placedMultiple
-                        ? `You place ${traps.length} ${trapType} traps.`
-                        : `You place a ${trapType} trap.`,
+            const totalCost = traps.reduce(
+                (acc, { trapType }) => (
+                    acc + trapDefinitions[trapType].data.value
                 ),
+                0,
             );
-            store.dispatch(createTraps(traps));
+            const manaRemaining = getMana(state);
+            const actionDescriptor = `materialize ${traps.length} ${trapType}`;
+
+            console.log(totalCost, manaRemaining);
+            if (totalCost < manaRemaining) {
+                store.dispatch(
+                    log(
+                        placedMultiple
+                            ? `You ${actionDescriptor} traps. You feel weaker... -[${totalCost} power]`
+                            : `You ${actionDescriptor} trap. You feel weaker... -[${totalCost} power]`,
+                    ),
+                );
+                store.dispatch(createTraps(traps));
+                store.dispatch(modifyMana(-totalCost));
+            } else {
+                store.dispatch(
+                    log(
+                        placedMultiple
+                            ? `You try to ${actionDescriptor} traps, but don't have the power.`
+                            : `You try to ${actionDescriptor} trap, but don't have the power.`,
+                    ),
+                );
+            }
         },
     ],
 };;

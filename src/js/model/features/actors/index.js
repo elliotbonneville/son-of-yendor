@@ -6,6 +6,7 @@ import takeDamage from './takeDamage.reducer';
 import killActor from './killActor.reducer';
 import pickUpItem from './pickUpItem.reducer';
 import dropItem from './dropItem.reducer';
+import leave from './leave.reducer';
 
 import {
     CREATE_ACTOR,
@@ -14,6 +15,7 @@ import {
     KILL_ACTOR,
     PICK_UP_ITEM,
     DROP_ITEM,
+    ACTOR_LEAVE,
 } from './types';
 
 export default createReducer(
@@ -25,5 +27,6 @@ export default createReducer(
         [KILL_ACTOR]: killActor,
         [PICK_UP_ITEM]: pickUpItem,
         [DROP_ITEM]: dropItem,
+        [ACTOR_LEAVE]: leave,
     },
 );

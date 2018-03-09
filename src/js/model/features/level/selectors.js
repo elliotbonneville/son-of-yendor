@@ -41,3 +41,14 @@ export function getRandomNeighbor(state, {
 
     return { x, y };
 }
+
+export function getTilesOfType(state, { type }) {
+    const tiles = getTiles(state);
+    return Object.entries(tiles).reduce(
+        (tilesOfType, [position, tile]) => {
+            if (tile.type !== type) return tilesOfType;
+            return Object.assign(tilesOfType, { [position]: tile });
+        },
+        {},
+    );
+}

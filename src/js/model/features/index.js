@@ -4,5 +4,6 @@ import { default as actors } from '~/model/features/actors';
 import { default as time } from '~/model/features/time';
 import { default as items } from '~/model/features/items';
 import { default as traps } from '~/model/features/traps';
+import { default as stats } from '~/model/features/stats';
 
-export const reducers = { level, ui, actors, time, items, traps };
+export const reducers = { level, ui, actors, time, items, stats, traps };
