@@ -1,8 +1,8 @@
 export default function (state, { mousePosition }) {
     return {
         ...state,
-        mouseDown: true,
+        mouseDown: false,
         mousePosition,
-        firstMouseDownPosition: mousePosition,
+        lastMouseDownPosition: mousePosition,
     };
 }

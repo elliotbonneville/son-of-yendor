@@ -1,4 +1,4 @@
 export default ((state, { modeTitle }) => ({
     ...state,
-    mode: [modeTitle, ...(state.mode || [])],
+    mode: modeTitle ? [modeTitle, ...(state.mode || [])] : state.mode,
 }));

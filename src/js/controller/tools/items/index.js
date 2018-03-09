@@ -13,13 +13,15 @@ import createItems from '~/model/features/items/createItems.action';
 
 import itemDefinitions from '~/model/data/items/definitions';
 
+const children = Object.keys(itemDefinitions).map(name => ({
+    title: name,
+    mode: name,
+}));
+
 export const menu = {
     title: 'Items',
     mode: toolTypes.ITEM,
-    children: Object.keys(itemDefinitions).map(name => ({
-        title: name,
-        mode: name,
-    })),
+    getChildren: () => children,
 }
 
 export const mouseListeners = {
@@ -27,7 +29,7 @@ export const mouseListeners = {
         ({ store, location }) => {
             const state = store.getState();
             const selectionBounds = rectangle(
-                mouseSelectors.selectionBounds(state),
+                mouseSelectors.getSelectionBounds(state),
             );
             const mode = modeSelectors.getMode(state);
             if (mode.length !== 2) return;

@@ -20,17 +20,14 @@ export default store => new Component({
     selectState: (state) => ({
         mouseDown: mouseSelectors.mouseDown(state),
         mousePosition: mouseSelectors.mousePosition(state),
-        selectionBounds: rectangle(mouseSelectors.selectionBounds(state)),
+        selectionBounds: rectangle(mouseSelectors.getSelectionBounds(state)),
         activeTool: modeSelectors.getActiveTool(state),
     }),
     mouseListeners: {
         mousedown: [
             function({ location }) {
                 store.dispatch(
-                    mouseActions.setMouseDown({
-                        mouseDown: true,
-                        mouseDownPosition: location
-                    }),
+                    mouseActions.setMouseDown({ mousePosition: location }),
                 );
             },
         ],
@@ -45,10 +42,7 @@ export default store => new Component({
                 }
 
                 store.dispatch(
-                    mouseActions.setMouseDown({
-                        mouseDown: false,
-                        mouseDownPosition: location
-                    }),
+                    mouseActions.setMouseUp({ mousePosition: location }),
                 ); 
             }
         ],

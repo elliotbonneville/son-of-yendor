@@ -16,7 +16,7 @@ export const getActiveMenu = (state) => {
         (menu, mode) => {
             const submenu = getMenuByMode({
                 mode,
-                children: menu.children,
+                children: menu.getChildren(state),
             });
 
             return submenu ? submenu : menu;
@@ -30,7 +30,7 @@ export const getActiveMenuItem = (state) => {
         (menu, mode) => {
             const child = getMenuByMode({
                 mode,
-                children: menu.children,
+                children: menu.getChildren(state),
             });
 
             return child ? child : menu;

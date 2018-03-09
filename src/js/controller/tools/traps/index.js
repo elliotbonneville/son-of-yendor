@@ -12,13 +12,15 @@ import log from '~/model/features/ui/messages/log.action';
 import createTraps from '~/model/features/traps/createTraps.action';
 import trapDefinitions from '~/model/data/traps/definitions';
 
+const children = Object.keys(trapDefinitions).map(name => ({
+    title: name,
+    mode: name,
+}));
+
 export const menu = {
     title: 'Traps',
     mode: toolTypes.TRAP,
-    children: Object.keys(trapDefinitions).map(name => ({
-        title: name,
-        mode: name,
-    })),
+    getChildren: () => children,
 }
 
 export const mouseListeners = {
@@ -26,7 +28,7 @@ export const mouseListeners = {
         ({ store, location }) => {
             const state = store.getState();
             const selectionBounds = rectangle(
-                mouseSelectors.selectionBounds(state),
+                mouseSelectors.getSelectionBounds(state),
             );
             const mode = modeSelectors.getMode(state);
             if (mode.length !== 2) return;

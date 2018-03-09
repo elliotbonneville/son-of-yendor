@@ -19,7 +19,13 @@ export const getItemsOnFloor = createSelector(
         ),
 );
 
-export function getItemsByPosition(state, { position }) {
+export function getItemsByPosition(
+    state,
+    {
+        items = getItemsOnFloor(state),
+        position,
+    }
+) {
     return Object.values(getItemsOnFloor(state)).filter(
         item => positionsEqual(position, item.position)
     );

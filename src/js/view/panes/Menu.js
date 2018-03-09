@@ -20,12 +20,13 @@ export default store => new Pane({
         const mode = modeSelectors.getMode(state);
         const newState = {
             title: activeMenu.title,
-            items: activeMenu.children.map((child) => ({
+            items: activeMenu.getChildren(store).map((child) => ({
                 mode: child.mode,
                 text: child.title,
                 active: child.mode === mode[0],
-                activate: () => {
-                    if (mode.length === 2 && !child.children) {
+                // Default behavior is to open a submenu
+                activate: child.callback ? child.callback : () => {
+                    if (mode.length === 2 && !child.getChildren) {
                         store.dispatch(modeActions.popMode());
                     }
 
