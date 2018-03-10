@@ -16,6 +16,8 @@ import DijkstraMapView from '~/view/components/data/DijkstraMapView';
 import ActorsView from '~/view/components/data/ActorsView';
 import MapControls from '~/view/components/MapControls';
 
+import GameStatusModal from '~/view/components/GameStatusModal';
+
 import { GAME_WIDTH, GAME_HEIGHT } from '~/constants';
 
 export default ({
@@ -42,6 +44,7 @@ export default ({
             DijkstraMapView(),
             ActorsView(),
             MapControls(store),
+            GameStatusModal(),
         ],
     });
 

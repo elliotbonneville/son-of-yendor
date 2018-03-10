@@ -1,28 +1,24 @@
+import positionsEqual from '~/utils/positionsEqual';
 import requiredProp from '~/utils/requiredProp';
 
 import { createSelector } from '~/model/utils';
 
-import { getActors } from '~/model/features/actors/selectors';
 import { getTraps } from './selectors';
+import { getActorById } from '~/model/features/actors/selectors';
+
+import { MOVE_ACTOR } from '~/model/features/actors/types';
 
 import * as trapBehaviors from '~/model/data/traps/behaviors';
-
-const getTrapsAndActors = createSelector(
-    [getActors, getTraps],
-    (actors, traps) => ({ actors, traps }),
-);
 
 export default ({
     store = requiredProp('store'),
 }) => {
-    const { actors, traps } = getTrapsAndActors(store.getState());
-
-    Object.values(actors).forEach((actor) => {
+    store.listen((newState, action) => {
+        if (action.type !== MOVE_ACTOR) return;
+        const traps = getTraps(newState);
+        const actor = getActorById(newState, { id: action.id });
         Object.values(traps).forEach((trap) => {
-            const { x: actorX, y: actorY } = actor.position;
-            const { x: trapX, y: trapY } = trap.position;
-            // Traps shouldn't apply to dead actors!
-            if (!actor.dead && actorX == trapX && actorY == trapY) {
+            if (!actor.dead && positionsEqual(actor.position, trap.position)) {
                 trapBehaviors[trap.type]({ actor, store });
             }
         });

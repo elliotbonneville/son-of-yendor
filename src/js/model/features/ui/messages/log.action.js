@@ -1,3 +1,3 @@
 import { LOG } from './types';
 
-export default (message) => ({ type: LOG, message });
+export default (message, color) => ({ type: LOG, message, color });

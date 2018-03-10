@@ -16,10 +16,13 @@ const adventurer = ({ actor, store }) => {
     // If he has something he's going to make a run for it
     // TODO: only run when adventurer has an ROI over a certain %
     if (actor.inventory.length > 0) {
+        const leaveMessage = actor.type === 'rogue'
+            ? 'The rogue makes good on his escape... you have failed! Game Over.'
+            : 'An adventurer waltzes off with some of your treasure!'
         if (getTile(state, actor.position).type === 'stairs') {
             return [
                 leave(actor),
-                log('An adventurer waltzes off with some of your treasure!'),
+                log(leaveMessage),
             ];
         }
 
@@ -55,4 +58,6 @@ const adventurer = ({ actor, store }) => {
     ];
 }
 
-export default { adventurer };
+const rogue = adventurer;
+
+export default { adventurer, rogue };

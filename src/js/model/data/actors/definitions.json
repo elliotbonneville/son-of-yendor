@@ -10,5 +10,16 @@
             "foregroundColor": "white",
             "backgroundColor": "black"
         }
+    },
+    "rogue": {
+        "data": {
+            "health": 1
+        },
+        "appearance": {
+            "body": "@",
+            "corpse": "%",
+            "foregroundColor": "purple",
+            "backgroundColor": "black"
+        }
     }
 }

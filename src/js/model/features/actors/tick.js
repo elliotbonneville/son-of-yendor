@@ -1,7 +1,11 @@
 import { generate as generateId } from 'shortid';
 import sample from 'lodash/sample';
 
-import { treasureToActorsRatio } from '~/model/constants';
+import {
+    treasureToActorsRatio,
+    winConditionTreasure,
+    rogueForecast,
+} from '~/model/constants';
 
 import requiredProp from '~/utils/requiredProp';
 
@@ -27,16 +31,24 @@ export default ({
     if (stairs.length && actorArriving) {
         const [position] = sample(stairs);
         const [x, y] = position.split(',');
-        store.dispatch(
-            createActor({
-                id: generateId(),
-                actorType: 'adventurer',
-                position: { x, y },
-            }),
+        const canCreateRogue = (
+            treasure > winConditionTreasure &&
+            Math.random() < rogueForecast &&
+            Object.values(getActors(state)).every(
+                actor => actor.type !== 'rogue'
+            )
         );
-        store.dispatch(
-            log('An intrepid adventurer comes dashing right down your stairs!'),
-        );
+        const createActorAction = createActor({
+            id: generateId(),
+            actorType: canCreateRogue ? 'rogue': 'adventurer',
+            position: { x, y },
+        });
+        const message = (canCreateRogue)
+            ? 'The rogue, bane of your forefathers, has popped in!'
+            : 'An intrepid adventurer comes dashing right down your stairs!';
+
+        store.dispatch(createActorAction);
+        store.dispatch(log(message, canCreateRogue ? 'purple' : 'white'));
     }
 
     // Kill actors

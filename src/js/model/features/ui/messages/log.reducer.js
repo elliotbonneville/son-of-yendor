@@ -1,4 +1,4 @@
-export default (ui, { message }) => ({
+export default (ui, { message, color }) => ({
     ...ui,
-    messages: [...ui.messages, message],
+    messages: [...ui.messages, { text: message, color }],
 });

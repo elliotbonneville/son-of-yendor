@@ -43,7 +43,7 @@ function init() {
 		store.dispatch(
 			createActor({
         id: generateId(),
-				actorType: 'adventurer',
+				actorType: 'rogue',
 				position: {
 					x: randomRange(1, MAP_WIDTH - 2),
 					y: randomRange(1, MAP_HEIGHT - 2),

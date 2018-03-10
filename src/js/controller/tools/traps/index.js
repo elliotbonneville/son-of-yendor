@@ -55,7 +55,6 @@ export const mouseListeners = {
             const manaRemaining = getMana(state);
             const actionDescriptor = `materialize ${traps.length} ${trapType}`;
 
-            console.log(totalCost, manaRemaining);
             if (totalCost < manaRemaining) {
                 store.dispatch(
                     log(

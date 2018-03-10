@@ -29,9 +29,9 @@ export default () => new Pane({
 
         this.children = selectedState.messages.map(
             (message, i) => Message({
-                message,
+                message: message.text,
                 y: i,
-                foregroundColor: colorGradient[
+                foregroundColor: message.color || colorGradient[
                     i + 5 - selectedState.messages.length
                 ],
             }),
