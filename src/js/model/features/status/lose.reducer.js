@@ -1,1 +1,4 @@
-export default state => 'lost';
+export default (state, { message }) => ({
+    message,
+    gameStatus: 'lost',
+});

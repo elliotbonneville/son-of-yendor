@@ -11,6 +11,8 @@ const plainScreen = rectangle({ width: GAME_WIDTH, height: GAME_HEIGHT })
             cells,
             {
                 [cellKey({ x, y })]: new Cell({
+                    foregroundColor: 'white',
+                    backgroundColor: 'black',
                     character: ' ',
                 }),
             }

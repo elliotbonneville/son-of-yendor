@@ -59,7 +59,7 @@ export const mouseListeners = {
             );
             const remainingMana = getMana(state);
 
-            if (totalCost < remainingMana) {
+            if (totalCost <= remainingMana) {
                 store.dispatch(setTiles(newTiles));
                 store.dispatch(modifyMana(-totalCost));
                 store.dispatch(

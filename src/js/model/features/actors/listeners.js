@@ -37,7 +37,9 @@ export default ({ store }) => {
                 );
                 if (killedRogue) setTimeout(
                     () => {
-                        store.dispatch(win());
+                        store.dispatch(win(
+                            'Congrats, you slew the rogue and beat the game!'),
+                        );
                         store.dispatch(setPaused(true));
                     },
                     2000,
@@ -49,7 +51,9 @@ export default ({ store }) => {
             if (action.actor.type === 'rogue') {
                 setTimeout(
                     () => {
-                        store.dispatch(lose());
+                        store.dispatch(
+                            lose('You lost: the rogue escaped... at least the good guy won!'),
+                        );
                         store.dispatch(setPaused(true));
                     },
                     2000,

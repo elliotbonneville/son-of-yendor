@@ -6,21 +6,17 @@ import plainScreen from '~/view/plainScreen';
 
 import { getStatus } from '~/model/features/status/selectors';
 
-const winMessage = 'Congrats, you slew the rogue and beat the game!';
-const loseMessage = 'You lost: the rogue escaped... at least the good guy won!';
-
 export default () => new Component({
     x: 0,
     y: 0,
     width: GAME_WIDTH,
     height: GAME_HEIGHT,
-    selectState: newState => ({ status: getStatus(newState) }),
+    selectState: newState => getStatus(newState),
     render() {
-        const { status } = this.state;
+        const { gameStatus, message } = this.state;
 
-        if (status === 'playing') return {};
+        if (gameStatus === 'playing') return {};
 
-        const message = (status === 'won') ? winMessage : loseMessage;
         return Object.assign(
             plainScreen(),
             label({

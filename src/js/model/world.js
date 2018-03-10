@@ -10,8 +10,14 @@ const tickers = [tickActors, tickStats];
 import trapListeners from '~/model/features/traps/listeners';
 import actorListeners from '~/model/features/actors/listeners';
 import itemListeners from '~/model/features/items/listeners';
+import statsListeners from '~/model/features/stats/listeners';
 
-const featureListeners = [actorListeners, itemListeners, trapListeners];
+const featureListeners = [
+    actorListeners, 
+    itemListeners,
+    trapListeners,
+    statsListeners,
+];
 
 function tick({ store }) {
     tickers.forEach(tick => tick({ store }));

@@ -1,3 +1,3 @@
 import { WIN } from './types';
 
-export default () => ({ type: WIN });
+export default message => ({ type: WIN, message });

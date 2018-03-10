@@ -58,7 +58,7 @@ export const mouseListeners = {
                 0,
             );
             const manaRemaining = getMana(state);
-            if (value < manaRemaining) {
+            if (value <= manaRemaining) {
                 store.dispatch(
                     log(`You materialize ${amount} ${name}. You feel weaker... [-${value} power]`),
                 );

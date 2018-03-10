@@ -6,7 +6,10 @@ import lose from './lose.reducer';
 import { WIN, LOSE } from './types';
 
 export default createReducer(
-    'playing',
+    {
+        gameStatus: 'playing',
+        message: '',
+    },
     {
         [WIN]: win,
         [LOSE]: lose,

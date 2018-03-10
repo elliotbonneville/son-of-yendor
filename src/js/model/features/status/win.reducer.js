@@ -1,1 +1,4 @@
-export default state => ('won');
+export default (state, { message }) => ({
+    message,
+    gameStatus: 'won',
+});

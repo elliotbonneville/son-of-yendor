@@ -1,2 +1,2 @@
 import { LOSE } from './types';
-export default () => ({ type: LOSE });
+export default message => ({ type: LOSE, message });
