@@ -13,8 +13,15 @@ export default ({ start, state, goal }) => {
     );
     const cheapestStep = fastestRouteToWealth[0];
     const possibleSteps = fastestRouteToWealth.filter(
-        step => distances[step] === distances[cheapestStep],
+        step => {
+            const [x, y] = step.split(',');
+            return (
+                getTile(state, { x, y }).data.walkable && 
+                distances[step] === distances[cheapestStep]
+            );
+        }
     );
     const [x, y] = sample(possibleSteps).split(',');
+
     return { x, y };
 };

@@ -35,15 +35,15 @@ function init() {
     store.dispatch(
         createLevel({
             seed: Date.now(),
-            levelType: 'cavern',
+            levelType: 'plain',
         }),
     );
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 0; i++) {
 		store.dispatch(
 			createActor({
         id: generateId(),
-				actorType: 'rogue',
+				actorType: 'adventurer',
 				position: {
 					x: randomRange(1, MAP_WIDTH - 2),
 					y: randomRange(1, MAP_HEIGHT - 2),
