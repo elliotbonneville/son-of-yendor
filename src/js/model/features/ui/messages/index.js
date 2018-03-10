@@ -17,7 +17,7 @@ export const defaultMessages = [
         color: 'purple',
     },
     {
-        text: 'Create some stairs and some treasure to get going!',
+        text: 'An adventurer wanders down your stairs!',
         color: 'white',
     },
 ];

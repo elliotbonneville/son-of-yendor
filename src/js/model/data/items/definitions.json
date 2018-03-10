@@ -29,7 +29,7 @@
     },
     "corpse": {
         "data": {
-            "value": -10
+            "value": 0
         },
         "metadata": {
             "singular": "corpse",

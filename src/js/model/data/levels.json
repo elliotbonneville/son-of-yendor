@@ -18,6 +18,9 @@
             "properties": {
                 "type": "wall"
             }
+        },
+        {
+            "feature": "stairs"
         }
     ],
     "lake": [

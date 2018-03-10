@@ -41,8 +41,8 @@ const adventurer = ({ actor, store }) => {
     // If we are standing on an item, pick it up and don't try to move
     const items = getItemsByPosition(state, { position: actor.position });
     if (items.length) return [
-        pickUpItem({ actor, item: items[0] }),
-        log(`The ${actor.type} picks up 1 ${items[0].type}`),
+        pickUpItem({ actorId: actor.id, itemId: items[0].id }),
+        log(`The ${actor.type} picks up 1 ${items[0].type}.`),
     ];
 
     // Otherwise, let's move towards the next item

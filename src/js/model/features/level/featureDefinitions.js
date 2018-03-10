@@ -1,3 +1,5 @@
+import { MAP_WIDTH, MAP_HEIGHT } from '~/constants';
+
 import cellKey from '~/utils/cellKey';
 
 import tileDefinitions from '~/model/data/tiles';
@@ -105,6 +107,24 @@ const levelFeatures = {
                     : {},
             ),
         ),
+    ),
+    stairs: createLevelFeature(
+        ({
+            bounds = requiredProp('bounds'),
+            rng = requiredProp('rng'),
+
+            level = {},
+        }) => {
+            const x = Math.floor(rng() * MAP_WIDTH - 2);
+            const y = Math.floor(rng() * MAP_HEIGHT - 2);
+            console.log(x, y);
+            return Object.assign(
+                level,
+                {
+                    [`${x},${y}`]: createTile({ type: 'stairs' }),
+                },
+            );
+        },
     ),
 };
 

@@ -28,7 +28,7 @@ export const menu = {
         return [
             ...items.map((item, i) => ({
                 title: `${i + 1}. ${item.type}`,
-                callback: () => store.dispatch(removeItem({ item })),
+                callback: () => store.dispatch(removeItem({ itemId: item.id })),
             })),
             ...traps.map((trap, i) => ({
                 title: `${i + 1 + items.length}. ${trap.type} trap`,
