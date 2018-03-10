@@ -5,7 +5,7 @@ import * as traps from './traps';
 import * as tiles from './tiles';
 import * as absorb from './absorb';
 
-const children = [absorb.menu, tiles.menu, traps.menu, items.menu];
+const children = [absorb.menu, tiles.menu, traps.menu];
 export const menu = {
     title: 'Menu',
     mode: toolTypes.OBSERVE,

@@ -1,3 +1,5 @@
+import { generate as generateId } from 'shortid';
+
 import { getActorById, getActorsToKill } from './selectors';
 
 import { ACTOR_LEAVE, DAMAGE_ACTOR } from './types';
@@ -5,6 +7,7 @@ import { ACTOR_LEAVE, DAMAGE_ACTOR } from './types';
 import placeItem from '~/model/features/items/placeItem.action';
 
 import killActor from '~/model/features/actors/killActor.action';
+import removeActor from '~/model/features/actors/removeActor.action';
 import dropItem from '~/model/features/actors/dropItem.action';
 
 import lose from '~/model/features/status/lose.action';
@@ -13,6 +16,9 @@ import win from '~/model/features/status/win.action';
 import setPaused from '~/model/features/time/setPaused.action';
 
 import log from '~/model/features/ui/messages/log.action';
+
+import createItems from '~/model/features/items/createItems.action';
+import createItem from '~/model/features/items/utils/createItem';
 
 export default ({ store }) => {
     store.listen((newState, action) => {
@@ -27,7 +33,17 @@ export default ({ store }) => {
                     }));
                 });
 
-                store.dispatch(killActor(actor.id));
+
+                store.dispatch(removeActor({ id: actor.id }));
+                store.dispatch(
+                    createItems([
+                        {
+                            itemType: 'corpse',
+                            position: actor.position,
+                            id: generateId(),
+                        }
+                    ]),
+                );
                 const killedRogue = actor.type === 'rogue';
                 const message = (killedRogue)
                     ? 'The rogue hath been slain. Congrats, you beat the game!'

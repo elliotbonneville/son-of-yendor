@@ -7,6 +7,7 @@ import killActor from './killActor.reducer';
 import pickUpItem from './pickUpItem.reducer';
 import dropItem from './dropItem.reducer';
 import leave from './leave.reducer';
+import removeActor from './removeActor.reducer';
 
 import {
     CREATE_ACTOR,
@@ -16,6 +17,7 @@ import {
     PICK_UP_ITEM,
     DROP_ITEM,
     ACTOR_LEAVE,
+    REMOVE_ACTOR,
 } from './types';
 
 export default createReducer(
@@ -28,5 +30,6 @@ export default createReducer(
         [PICK_UP_ITEM]: pickUpItem,
         [DROP_ITEM]: dropItem,
         [ACTOR_LEAVE]: leave,
+        [REMOVE_ACTOR]: removeActor,
     },
 );

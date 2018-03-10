@@ -26,5 +26,19 @@
             "foregroundColor": "red",
             "backgroundColor": "black"
         }
+    },
+    "corpse": {
+        "data": {
+            "value": 0
+        },
+        "metadata": {
+            "singular": "corpse",
+            "plural": "corpses"
+        },
+        "appearance": {
+            "character": "%",
+            "foregroundColor": "white",
+            "backgroundColor": "black"
+        }
     }
 }
