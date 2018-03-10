@@ -10,7 +10,7 @@ import { getTiles } from '~/model/features/level/selectors';
 import { getItemsOnFloor } from '~/model/features/items/selectors';
 import { getTilesOfType } from '~/model/features/level/selectors';
 
-const getUnassignedDistanceMap = distance => rectangle({
+export const getUnassignedDistanceMap = distance => rectangle({
     width: MAP_WIDTH,
     height: MAP_HEIGHT
 }).reduce(
@@ -28,12 +28,13 @@ export const generateMap = ({
         {},
         getUnassignedDistanceMap(Infinity),
     );
-    const graphs = pointsOfInterest.map(({ position, interestLevel }) => {
+    pointsOfInterest.forEach(({ position, interestLevel = 0 }) => {
         combinedDistances[position] = interestLevel;
         const frontier = [position];
         const distance = { [position]: interestLevel };
         let current;
         let neighbors;
+        console.log(distance);
 
         while (frontier.length) {
             current = frontier.shift();

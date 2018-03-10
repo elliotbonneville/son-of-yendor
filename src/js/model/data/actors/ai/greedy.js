@@ -2,15 +2,16 @@ import sample from 'lodash/sample';
 
 import getDijkstraMap, {
     generateMap,
+    getUnassignedDistanceMap,
 } from '~/model/features/level/dijkstraMap.selector';
 import { getTile, getTiles } from '~/model/features/level/selectors';
 
 export default ({ start, state, itinerary, goal }) => {
     const itemDistances = getDijkstraMap({ state, name: goal });
-    const itineraryDistances = generateMap({
-        pointsOfInterest: itinerary,
-        tiles: getTiles(state),
-    });
+    const itineraryDistances = itinerary
+        ? generateMap({ pointsOfInterest: itinerary, tiles: getTiles(state) })
+        : getUnassignedDistanceMap(Infinity);
+
     const distances = Object.entries(itemDistances).reduce(
         (totalDistances, [position, distance]) => Object.assign(
             totalDistances,
@@ -30,6 +31,7 @@ export default ({ start, state, itinerary, goal }) => {
         },
     );
     const cheapestStep = fastestRouteToWealth[0];
+    console.log(itemDistances);
     const possibleSteps = fastestRouteToWealth.filter(
         step => {
             const [x, y] = step.split(',');
