@@ -1,5 +1,5 @@
 // How fast you gain power based on the amount of treasure you have
-export const treasureToPowerRatio = 0.01;
+export const treasureToPowerRatio = 0.04;
 
 // How much 1 unit of treasure increases the chances of spawning an adventurer
 // this turn
