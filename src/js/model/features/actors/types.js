@@ -6,3 +6,4 @@ export const KILL_ACTOR = 'KILL_ACTOR';
 export const PICK_UP_ITEM = 'PICK_UP_ITEM';
 export const DROP_ITEM = 'DROP_ITEM';
 export const ACTOR_LEAVE = 'ACTOR_LEAVE';
+export const MARK_ITINERARY = 'MARK_ITINERARY';

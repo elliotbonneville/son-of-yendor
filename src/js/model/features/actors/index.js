@@ -8,6 +8,7 @@ import pickUpItem from './pickUpItem.reducer';
 import dropItem from './dropItem.reducer';
 import leave from './leave.reducer';
 import removeActor from './removeActor.reducer';
+import markItinerary from './markItinerary.reducer';
 
 import {
     CREATE_ACTOR,
@@ -18,6 +19,7 @@ import {
     DROP_ITEM,
     ACTOR_LEAVE,
     REMOVE_ACTOR,
+    MARK_ITINERARY,
 } from './types';
 
 export default createReducer(
@@ -31,5 +33,6 @@ export default createReducer(
         [DROP_ITEM]: dropItem,
         [ACTOR_LEAVE]: leave,
         [REMOVE_ACTOR]: removeActor,
+        [MARK_ITINERARY]: markItinerary,
     },
 );

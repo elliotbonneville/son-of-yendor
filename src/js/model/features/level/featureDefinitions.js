@@ -115,9 +115,8 @@ const levelFeatures = {
 
             level = {},
         }) => {
-            const x = Math.floor(rng() * MAP_WIDTH - 2);
-            const y = Math.floor(rng() * MAP_HEIGHT - 2);
-            console.log(x, y);
+            const x = Math.ceil(rng() * MAP_WIDTH - 3) + 1;
+            const y = Math.ceil(rng() * MAP_HEIGHT - 3) + 1;
             return Object.assign(
                 level,
                 {

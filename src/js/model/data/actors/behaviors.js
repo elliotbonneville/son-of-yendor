@@ -1,4 +1,5 @@
 import cellKey from '~/utils/cellKey';
+import chebyshevDistance from '~/utils/chebyshevDistance';
 
 import greedy from './ai/greedy';
 
@@ -8,12 +9,27 @@ import { getTile } from '~/model/features/level/selectors';
 import log from '~/model/features/ui/messages/log.action';
 import move from '~/model/features/actors/move.action';
 import leave from '~/model/features/actors/leave.action';
+import markItinerary from '~/model/features/actors/markItinerary.action';
 import pickUpItem from '~/model/features/actors/pickUpItem.action';
 
 const adventurer = ({ actor, store }) => {
     const state = store.getState();
 
-    // If he has something he's going to make a run for it
+    // Mark itinerary if actor is at a location he's been wanting to go
+    actor.itinerary.forEach(destination => {
+        const [x, y] = destination.position.split(',');
+        const distance = chebyshevDistance(actor.position, { x, y });
+        if (distance < 3) {
+            store.dispatch(
+                markItinerary({
+                    actorId: actor.id,
+                    position: destination.position,
+                }),
+            );
+        }
+    });
+
+    // If he has some loot he's going to make a run for it
     // TODO: only run when adventurer has an ROI over a certain %
     if (actor.inventory.length > 2) {
         const leaveMessage = actor.type === 'rogue'
@@ -52,6 +68,7 @@ const adventurer = ({ actor, store }) => {
             position: greedy({
                 state,
                 start: actor.position,
+                itinerary: actor.itinerary || [],
                 goal: 'items',
             }),
         }),

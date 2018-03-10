@@ -1,3 +1,3 @@
 export default function requiredProp(name) {
-    throw new Error(`Property '${name}' is required`);
+    console.warn(`Property '${name}' is required`);
 }

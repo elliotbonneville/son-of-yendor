@@ -2,6 +2,8 @@ import requiredProp from '~/utils/requiredProp';
 
 import actorDefinitions from '~/model/data/actors/definitions';
 
+import generateItinerary from '~/model/features/level/utils/generateItinerary';
+
 const createActor = ({
     actorType = requiredProp('actorType'),
     id,
@@ -14,6 +16,7 @@ const createActor = ({
         position,
         type: actorType,
         inventory: [],
+        itinerary: generateItinerary(),
     }
 };
 

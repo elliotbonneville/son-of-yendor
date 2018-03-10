@@ -18,7 +18,7 @@ const getUnassignedDistanceMap = distance => rectangle({
     {},
 );
 
-const generateMap = ({
+export const generateMap = ({
     pointsOfInterest = requiredProp('pointsOfInterest'),
     tiles = requiredProp('tiles'),
     maxInterest = Infinity,
