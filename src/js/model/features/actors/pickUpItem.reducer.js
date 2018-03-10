@@ -1,7 +1,10 @@
-export default (actors, { actor, item }) => ({
+export default (actors, { actorId, itemId }) => ({
     ...actors,
-    [actor.id]: {
-        ...actor,
-        inventory: [...actor.inventory, item],
+    [actorId]: {
+        ...actors[actorId],
+        inventory: [
+            ...actors[actorId].inventory,
+            itemId,
+        ],
     },
 });

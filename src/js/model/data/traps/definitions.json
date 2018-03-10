@@ -7,7 +7,7 @@
         "appearance": {
             "foregroundColor": "brown",
             "backgroundColor": "black",
-            "character": "^"
+            "character": "_"
         }
     }
 }

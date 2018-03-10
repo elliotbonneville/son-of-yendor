@@ -51,10 +51,7 @@ export default ({
         store.dispatch(log(message, canCreateRogue ? 'purple' : 'white'));
     }
 
-    // Kill actors
     Object.values(getActors(state)).forEach((actor) => {
-        if (!actor.dead) {
-            behaviors[actor.type]({ actor, store }).forEach(store.dispatch);
-        }
+        behaviors[actor.type]({ actor, store }).forEach(store.dispatch);
     });
 };

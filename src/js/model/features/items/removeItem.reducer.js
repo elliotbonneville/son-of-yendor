@@ -1,4 +1,4 @@
-export default (items, { item }) => ({
+export default (items, { itemId }) => ({
     ...items,
-    [item.id]: { ...item, position: undefined },
+    [itemId]: { ...items[itemId], position: undefined },
 });

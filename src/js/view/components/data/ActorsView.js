@@ -15,7 +15,6 @@ export default () => DataView({
                 const {
                     foregroundColor,
                     backgroundColor,
-                    corpse,
                     body,
                 } = actorData[actor.type].appearance;
                 return Object.assign(
@@ -24,7 +23,7 @@ export default () => DataView({
                         [cellKey(actor.position)]: new Cell({
                             foregroundColor,
                             backgroundColor,
-                            character: actor.dead ? corpse : body,
+                            character: body
                         }),
                     },
                 );

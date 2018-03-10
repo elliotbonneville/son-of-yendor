@@ -19,7 +19,7 @@ const valueColors = [
 
 export default () => DataView({
     selectStateData: state => (game.debug)
-        ? dijkstraMap({ state, name: 'stairs' })
+        ? dijkstraMap({ state, name: 'items' })
         : {},
     renderData: values => Object.entries(values).reduce(
         (cells, [coordinates, value]) => {

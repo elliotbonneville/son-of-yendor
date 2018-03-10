@@ -11,7 +11,7 @@ const tickMana = ({ store }) => {
     const manaIncrease = parseInt(totalTreasure * treasureToPowerRatio);
     const currentMana = getMana(state);
     const maxMana = Math.min(100, currentMana + manaIncrease);
-    const difference = maxMana - currentMana;
+    const difference = Math.max(0, maxMana - currentMana);
     store.dispatch(modifyMana(difference));
 }
 

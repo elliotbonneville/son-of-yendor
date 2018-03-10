@@ -10,23 +10,25 @@ import { getTiles } from '~/model/features/level/selectors';
 import { getItemsOnFloor } from '~/model/features/items/selectors';
 import { getTilesOfType } from '~/model/features/level/selectors';
 
-const unassignedDistanceMap = rectangle({
+const getUnassignedDistanceMap = distance => rectangle({
     width: MAP_WIDTH,
     height: MAP_HEIGHT
 }).reduce(
-    (map, coords) => Object.assign( map, { [cellKey(coords)]: Infinity }),
+    (map, coords) => Object.assign( map, { [cellKey(coords)]: distance }),
     {},
 );
 
 const generateMap = ({
     pointsOfInterest = requiredProp('pointsOfInterest'),
     tiles = requiredProp('tiles'),
-
-    interestLevel = 0,
+    maxInterest = Infinity,
 }) => {
     const startTime = Date.now();
-    const combinedDistances = Object.assign({}, unassignedDistanceMap);
-    const graphs = pointsOfInterest.map(({ position }) => {
+    const combinedDistances = Object.assign(
+        {},
+        getUnassignedDistanceMap(Infinity),
+    );
+    const graphs = pointsOfInterest.map(({ position, interestLevel }) => {
         combinedDistances[position] = interestLevel;
         const frontier = [position];
         const distance = { [position]: interestLevel };

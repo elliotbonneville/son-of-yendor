@@ -1,7 +1,7 @@
 import { PLACE_ITEM } from './types';
 
-export default ({ id, position }) => ({
+export default ({ itemId, position }) => ({
     type: PLACE_ITEM,
-    id,
+    itemId,
     position,
 });

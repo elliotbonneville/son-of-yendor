@@ -1,6 +1,6 @@
-export default (items, { id, position }) => {
+export default (items, { itemId, position }) => {
     return {
         ...items,
-        [id]: { ...items[id], position },
+        [itemId]: { ...items[itemId], position },
     };
 };

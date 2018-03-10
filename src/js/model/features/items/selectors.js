@@ -33,7 +33,10 @@ export function getItemsByPosition(
 
 export function getTotalValue(items) {
     return items.length
-        ? items.reduce((totalValue, item) => totalValue + item.data.value, 0)
+        ? items.reduce(
+            (totalValue, item) => totalValue + Math.max(0, item.data.value),
+            0,
+        )
         : 0;
 }
 

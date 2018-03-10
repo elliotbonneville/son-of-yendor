@@ -1,6 +1,6 @@
 import { REMOVE_ITEM } from './types';
 
-export default ({ item }) => ({
+export default ({ itemId }) => ({
     type: REMOVE_ITEM,
-    item,
+    itemId,
 });

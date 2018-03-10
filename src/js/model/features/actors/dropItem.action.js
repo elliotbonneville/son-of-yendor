@@ -1,7 +1,7 @@
 import { DROP_ITEM } from './types';
 
-export default ({ item, id }) => ({
+export default ({ itemId, actorId }) => ({
     type: DROP_ITEM,
-    item,
-    id,
+    itemId,
+    actorId,
 });

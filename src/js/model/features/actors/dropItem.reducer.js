@@ -1,7 +1,7 @@
-export default (actors, { id, item }) => ({
+export default (actors, { actorId, itemId }) => ({
     ...actors,
-    [id]: {
-        ...actors[id],
-        inventory: actors[id].inventory.filter(heldItem => heldItem !== item),
+    [actorId]: {
+        ...actors[actorId],
+        inventory: actors[actorId].inventory.filter(id => id !== itemId),
     },
 });

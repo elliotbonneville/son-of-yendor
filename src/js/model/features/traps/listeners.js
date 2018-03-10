@@ -18,7 +18,7 @@ export default ({
         const traps = getTraps(newState);
         const actor = getActorById(newState, { id: action.id });
         Object.values(traps).forEach((trap) => {
-            if (!actor.dead && positionsEqual(actor.position, trap.position)) {
+            if (positionsEqual(actor.position, trap.position)) {
                 trapBehaviors[trap.type]({ actor, store });
             }
         });

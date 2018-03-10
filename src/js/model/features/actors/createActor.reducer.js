@@ -6,14 +6,16 @@ const createActor = ({
     actorType = requiredProp('actorType'),
     id,
     position = requiredProp('position'),
-}) => ({
-    ...actorDefinitions[actorType].data,
-    id,
-    position,
-    type: actorType,
-    dead: false,
-    inventory: [],
-});
+}) => {
+    const { data } = actorDefinitions[actorType];
+    return {
+        ...data,
+        id,
+        position,
+        type: actorType,
+        inventory: [],
+    }
+};
 
 export default (state, { id, actorType, position }) => ({
     ...state,
