@@ -6,7 +6,6 @@ import { generate as generateId } from 'shortid';
 import { rootReducer } from '~/model';
 import createStore from '~/model/store';
 import createWorld from '~/model/world';
-import watchers from '~/model/watchers';
 
 import createLevel from '~/model/features/level/createLevel.action';
 import createActor from '~/model/features/actors/createActor.action';
@@ -22,7 +21,7 @@ import createController from '~/controller';
 import { randomRange } from '~/utils/math2';
 
 const container = document.getElementById('app');
-const store = createStore(rootReducer, watchers);
+const store = createStore(rootReducer, {});
 const renderer = createRenderer({ container });
 const controller = createController({ store, renderer });
 const view = View({ store, renderer, controller });
@@ -40,10 +39,10 @@ function init() {
         }),
     );
 
-    for (let i = 0; i < 0; i++) {
+    for (let i = 0; i < 1; i++) {
 		store.dispatch(
 			createActor({
-                id: generateId(),
+        id: generateId(),
 				actorType: 'adventurer',
 				position: {
 					x: randomRange(1, MAP_WIDTH - 2),

@@ -1,20 +1,11 @@
-import { treasureToPowerRatio } from '~/model/constants';
+import { PICK_UP_ITEM } from '~/model/features/actors/types';
 
-import modifyMana from '~/model/features/stats/modifyMana.action';
-
-import { getValueOfItemsOnFloor } from './selectors';
-import { getMana } from '~/model/features/stats/selectors';
-
-const tickMana = ({ store }) => {
-    const state = store.getState();
-    const totalTreasure = getValueOfItemsOnFloor(state);
-    const manaIncrease = parseInt(totalTreasure * treasureToPowerRatio);
-    const currentMana = getMana(state);
-    const maxMana = Math.min(100, currentMana + manaIncrease);
-    const difference = maxMana - currentMana;
-    store.dispatch(modifyMana(difference));
-}
+import removeItem from '~/model/features/items/removeItem.action';
 
 export default ({ store }) => {
-    tickMana({ store });
+    store.listen((newState, action) => {
+        if (action.type === PICK_UP_ITEM) {
+            store.dispatch(removeItem({ item: action.item }));
+        }
+    });
 };

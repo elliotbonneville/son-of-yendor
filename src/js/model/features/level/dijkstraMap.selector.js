@@ -24,7 +24,6 @@ const generateMap = ({
 
     interestLevel = 0,
 }) => {
-    console.log(pointsOfInterest, tiles);
     const startTime = Date.now();
     const combinedDistances = Object.assign({}, unassignedDistanceMap);
     const graphs = pointsOfInterest.map(({ position }) => {

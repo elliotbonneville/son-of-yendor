@@ -1,19 +1,4 @@
-import requiredProp from '~/utils/requiredProp';
-
-import itemDefinitions from '~/model/data/items/definitions';
-
-const createItem = ({
-    id = requiredProp('id'),
-    itemType = requiredProp('itemType'),
-    position = requiredProp('position'),
-}) => {
-    return {
-        position,
-        id,
-        type: itemType,
-        ...itemDefinitions[itemType],
-    };
-};
+import createItem from './utils/createItem';
 
 export default (state, { items }) => Object.assign(
     {},

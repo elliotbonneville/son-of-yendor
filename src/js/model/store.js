@@ -1,6 +1,4 @@
-import { applyMiddleware } from '~/model/utils';
-
-export default function store(reducer, middlewares, initialState = {}) {
+export default function (reducer, initialState = {}) {
     const listeners = []
     let state = initialState;
     
@@ -10,7 +8,7 @@ export default function store(reducer, middlewares, initialState = {}) {
         actions.forEach(action => {
             const previousState = state;
             state = reducer(state, action);
-            listeners.forEach(listener => listener(state));
+            listeners.forEach(listener => listener(state, action));
         });
     };
 
@@ -23,8 +21,6 @@ export default function store(reducer, middlewares, initialState = {}) {
         };
     };
 
-    const store = { getState, dispatch, listen };
-    const enhancedStore = applyMiddleware(store, middlewares);
-    enhancedStore.dispatch({ type: 'INIT' });
-    return enhancedStore;
+    dispatch({ type: 'INIT' });
+    return { getState, dispatch, listen };
 }

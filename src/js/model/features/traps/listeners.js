@@ -21,7 +21,8 @@ export default ({
         Object.values(traps).forEach((trap) => {
             const { x: actorX, y: actorY } = actor.position;
             const { x: trapX, y: trapY } = trap.position;
-            if (actorX == trapX && actorY == trapY) {
+            // Traps shouldn't apply to dead actors!
+            if (!actor.dead && actorX == trapX && actorY == trapY) {
                 trapBehaviors[trap.type]({ actor, store });
             }
         });

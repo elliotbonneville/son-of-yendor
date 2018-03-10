@@ -1,7 +1,7 @@
-export default (actors, { actor }) => ({
+export default (actors, { id }) => ({
     ...actors,
-    [actor.id]: {
-        ...actor,
+    [id]: {
+        ...actors[id],
         dead: true,
     },
 });

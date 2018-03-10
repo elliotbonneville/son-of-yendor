@@ -57,11 +57,3 @@ export function createSelector(selectors, selector) {
         return computedValue;
     };
 }
-
-export function applyMiddleware(store, passedInMiddlewares) {
-    const middlewares = passedInMiddlewares.slice();
-    middlewares.reverse();
-    let dispatch = store.dispatch;
-    middlewares.forEach(middleware => (dispatch = middleware(store)(dispatch)));
-    return Object.assign({}, store, { dispatch });
-}
