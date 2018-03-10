@@ -2,7 +2,8 @@
     "adventurer": {
         "data": {
             "health": 10,
-            "baseWealth": 10
+            "baseWealth": 10,
+            "agility": 0.5
         },
         "appearance": {
             "body": "@",
@@ -14,7 +15,8 @@
     "rogue": {
         "data": {
             "health": 1,
-            "baseWealth": 100
+            "baseWealth": 100,
+            "agility": 0.7
         },
         "appearance": {
             "body": "@",

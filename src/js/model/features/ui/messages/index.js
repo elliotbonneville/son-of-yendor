@@ -18,6 +18,5 @@ export const defaultMessages = [
     },
     {
         text: 'An adventurer wanders down your stairs!',
-        color: 'white',
     },
 ];

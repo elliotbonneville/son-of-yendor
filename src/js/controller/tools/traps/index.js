@@ -59,8 +59,8 @@ export const mouseListeners = {
                 store.dispatch(
                     log(
                         placedMultiple
-                            ? `You ${actionDescriptor} traps. You feel weaker... -[${totalCost} power]`
-                            : `You ${actionDescriptor} trap. You feel weaker... -[${totalCost} power]`,
+                            ? `You ${actionDescriptor} traps. You feel weaker... [-${totalCost} power]`
+                            : `You ${actionDescriptor} trap. You feel weaker... [-${totalCost} power]`,
                     ),
                 );
                 store.dispatch(createTraps(traps));

@@ -7,7 +7,18 @@
         "appearance": {
             "foregroundColor": "brown",
             "backgroundColor": "black",
-            "character": "_"
+            "character": "^"
+        }
+    },
+    "stone block": {
+        "data": {
+            "behavior": "stoneBlock",
+            "value": 15
+        },
+        "appearance": {
+            "foregroundColor": "gray",
+            "backgroundColor": "black",
+            "character": "^"
         }
     }
 }
