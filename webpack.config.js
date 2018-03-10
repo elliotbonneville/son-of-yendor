@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: './src/js/index.js',
@@ -39,6 +40,9 @@ module.exports = {
         colors: true
     },
     devtool: 'inline-source-map',
+    plugins: [
+        new UglifyJsPlugin(),
+    ],
     resolve: {
         alias: {
             src: path.join(__dirname, './src'),
